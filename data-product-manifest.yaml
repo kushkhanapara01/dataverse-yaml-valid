@@ -79,7 +79,7 @@ stateManagement:
       - cust_birthday
       - cust_nationality
 transformation:
-  - alias: Transform 1
+  - alias: Transform1
     type: SQL
     description: Join input1 and input2 to get the actual member name
     query: select * from i1 inner join i2 on i1.id=i2.id
@@ -88,7 +88,7 @@ transformation:
         sqlReference: i1
       - alias: input2
         sqlReference: i2
-  - alias: Transform 2
+  - alias: Transform2
     type: SQL
     description: Generate the sum of marks on a name level
     query: select name,sum(marks) from t1 group by name
