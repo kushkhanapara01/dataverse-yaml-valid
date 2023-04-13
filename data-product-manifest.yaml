@@ -11,39 +11,39 @@ discoveryPort:
     - House Rental
   extra: {}
 inputPorts:
-  - alias: usersS3_input_port
-    description: string
-    tags: []
-    extra: {}
-    syncType: pull
-    sourceUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
-    type: s3
-    entityId:
-      alias: usersS3
-      createEntity: true
-      entityName: houses_Madrid.parquet
-      type: s3-bucket
-      entityPath: s3a://dp-input-bucket/test/houses_Madrid.parquet
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: parquet
-      delimiter: "|"
-      filter: subtitle != ''
-      processingTimeColumn:
-        - processing_time
-      actualTimeColumn:
-        - processing_time
-      projection:
-        - id
-        - title
-        - subtitle
-        - sq_mt_built
-        - sq_mt_useful
-        - rent_price
-        - rent_price_by_area
-        - buy_price
-        - buy_price_by_area
+  alias: usersS3_input_port
+  description: string
+  tags: []
+  extra: {}
+  syncType: pull
+  sourceUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
+  type: s3
+  entityId:
+    alias: usersS3
+    createEntity: true
+    entityName: houses_Madrid.parquet
+    type: s3-bucket
+    entityPath: s3a://dp-input-bucket/test/houses_Madrid.parquet
+    entityFilterPatternMatch: "*"
+    sourceSchemaUrn: urn:dv:schema:9d4716d4
+    projectSchemaUrn: urn:dv:schema:9d4716d6
+    fileFormat: parquet
+    delimiter: "|"
+    filter: subtitle != ''
+    processingTimeColumn:
+      - processing_time
+    actualTimeColumn:
+      - processing_time
+    projection:
+      - id
+      - title
+      - subtitle
+      - sq_mt_built
+      - sq_mt_useful
+      - rent_price
+      - rent_price_by_area
+      - buy_price
+      - buy_price_by_area
 stateManagement:
   alias: users_count_by_gender
   refreshInterval: 00 10 * * *
