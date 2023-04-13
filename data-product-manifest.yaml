@@ -105,5 +105,5 @@ dataQualityCheck:
   RecordCountCheck:
     inputPort:
       - referenceAlias: car_prices
-        expression: 'sq'
+        expression: '<'
         number: 100
