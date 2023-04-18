@@ -114,7 +114,7 @@ dataQualityCheck:
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: car_input_port
+      - referenceAlias: car_input_port1
         checks:
           - column: amount
             expression: ">="
@@ -125,7 +125,7 @@ dataQualityCheck:
           - column: auth_code
             expression: ">="
             number: 0.9
-      - referenceAlias: car_input_port1
+      - referenceAlias: car_input_port
         checks:
           - column: amount
             expression: ">="
@@ -137,7 +137,7 @@ dataQualityCheck:
             expression: ">="
             number: 0.9 
     stateManagement:
-      referenceAlias: Test0001
+      referenceAlias: car_prices
       checks:
         - column: amount
           expression: ">="
