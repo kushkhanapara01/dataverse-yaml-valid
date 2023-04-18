@@ -41,7 +41,7 @@ inputPorts:
         - marks
         - modified
 stateManagement:
-  alias: Test00010
+  alias: Test0001
   refreshInterval: 45 15 * * *
   updateStrategy: append
   retentionVersions: "1"
@@ -78,7 +78,7 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: car_prices
+      - referenceAlias: Test0001_input_port
         expression: "=="
         number: 100
     stateManagement:
@@ -87,7 +87,7 @@ dataQualityCheck:
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: car_prices
+      - referenceAlias: Test0001_input_port
         checks:
           - column: amount
             expression: ">="
