@@ -109,7 +109,7 @@ dataQualityCheck:
         expression: "=="
         number: 100
     stateManagement:
-      referenceAlias: Test0001
+      referenceAlias: car_prices
       expression: "=="
       number: 100
   NullValueCheck:
