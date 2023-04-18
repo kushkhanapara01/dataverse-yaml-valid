@@ -41,6 +41,37 @@ inputPorts:
         - amount
         - payment_option
         - currency
+  - alias: car_input_port1
+    description: string
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3
+    sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
+    entityId:
+      alias: car_prices
+      createEntity: true
+      type: s3-bucket
+      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      entityVariables:
+        - key: my_dynamic_year
+          value: date-YYYYMMdd
+      entityFilterPatternMatch: "*"
+      sourceSchemaUrn: urn:dv:schema:9d4716d4
+      projectSchemaUrn: urn:dv:schema:9d4716d6
+      fileFormat: csv
+      delimiter: ","
+      header: true
+      processingTimeColumn:
+        - processing_time
+      actualTimeColumn:
+        - processing_time
+      projection:
+        - legal_entity
+        - store_name
+        - amount
+        - payment_option
+        - currency
 stateManagement:
   alias: car_prices
   refreshInterval: "*/10 * * * *"
@@ -88,6 +119,17 @@ dataQualityCheck:
           - column: auth_code
             expression: ">="
             number: 0.9
+      - referenceAlias: car_input_port1
+        checks:
+          - column: amount
+            expression: ">="
+            number: 0.9
+          - column: card_number
+            expression: ">="
+            number: 0.95
+          - column: auth_code
+            expression: ">="
+            number: 0.9 
     stateManagement:
       referenceAlias: Test0001
       checks:
