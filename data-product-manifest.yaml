@@ -41,7 +41,7 @@ inputPorts:
         - marks
         - modified
 stateManagement:
-  alias: Test0001
+  alias: Test00010
   refreshInterval: 45 15 * * *
   updateStrategy: append
   retentionVersions: "1"
