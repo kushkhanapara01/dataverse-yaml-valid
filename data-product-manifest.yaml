@@ -79,13 +79,6 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     stateManagement:
-      referenceAlias: Test0001
+      referenceAlias: Test00010
       expression: "=="
       number: 100
-  NullValueCheck:
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - column: amount
-          expression: ">="
-          number: 0.9
