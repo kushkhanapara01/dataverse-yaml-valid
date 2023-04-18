@@ -105,6 +105,6 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: car_prices
+      - referenceAlias: usersS3
         expression: '<'
         number: 100
