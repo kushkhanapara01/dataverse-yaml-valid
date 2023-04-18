@@ -114,7 +114,7 @@ dataQualityCheck:
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: car_input_port54
+      - referenceAlias: car_input_port
         checks:
           - column: amount
             expression: ">="
