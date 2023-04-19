@@ -1,6 +1,6 @@
 version: 0.0.1
 discoveryPort:
-  name: main branch
+  name: main branch 3
   description: The data product provides average house rental rates in Madrid by house
     type (Pisos, Aticos, Duplex, etc)
   category: customer
@@ -11,45 +11,24 @@ discoveryPort:
     - House Rental
   extra: {}
 inputPorts:
-  - alias: input_port_k
+  - alias: data-product-as-source
     description: string
     tags: []
     extra: {}
     syncType: pull
-    sourceUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
-    type: s3
-    entityId:
-      alias: usersS3
-      createEntity: true
-      entityName: houses_Madrid.parquet
-      type: s3-bucket
-      entityPath: s3a://dp-input-bucket/test/houses_Madrid.parquet
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: parquet
-      incrementalLoad: true
-      delimiter: "|"
-      filter: subtitle != ''
-      processingTimeColumn:
-        - processing_time
-      actualTimeColumn:
-        - processing_time
-      projection:
-        - id
-        - title
-        - subtitle
-        - sq_mt_built
-        - sq_mt_useful
-        - rent_price
-        - rent_price_by_area
-        - buy_price
-        - buy_price_by_area
+    type: dataproduct
+    dataProductUrn: urn:dv:datasource:86458004-efae-470c-9d4f-1c3a38f01e02
+    filter: ""
+    projection:
+      - id
+      - name
+      - marks
+      - modified
 stateManagement:
   alias: users_count_by_gender
   refreshInterval: 00 10 * * *
   retentionVersions: "10"
-  updateStrategy: SCD2
+  updateStrategy: SCD-2
   productStoreState:
     #logicalSchemaUrn: urn:dv:schema:263deedb-916b-40f2-9740-6ee02ce9b8b9
     logicalSchema:
@@ -79,22 +58,7 @@ stateManagement:
       - cust_birthday
       - cust_nationality
 transformation:
-  - alias: Transform 1
-  type: SQL
-  description: Join input1 and input2 to get the actual member name
-  query: select * from i1 inner join i2 on i1.id=i2.id
-  references:
-    - alias: input1
-      sqlReference: i1
-    - alias: input2
-      sqlReference: i2
-- alias: Transform 2
-  type: SQL
-  description: Generate the sum of marks on a name level
-  query: select name,sum(marks) from t1 group by name
-  references:
-    - alias: Transform 1
-      sqlReference: t1
+  sql: select * from usersS3
 outputPort:
   channels:
   - channelType: JDBC
@@ -104,6 +68,6 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: car_prices
-        expression: 'sq'
+      - referenceAlias: data-product-as-source
+        expression: '=='
         number: 100
