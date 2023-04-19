@@ -17,7 +17,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: dataproduct
-    dataProductUrn: urn:dv:datasource:86458004-efae-470c-9d4f-1c3a38f01e02
+    dataProductUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
     filter: ""
     projection:
       - id
