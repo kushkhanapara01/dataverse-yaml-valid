@@ -79,6 +79,6 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     stateManagement:
-      referenceAlias: Test00010
+      referenceAlias: Test0001
       expression: "=="
       number: 100
