@@ -2,7 +2,7 @@
 version: 0.0.1
 discoveryPort:
   alias: alias
-  name: Data Product Data Quality Rules
+  name: DataKK
   description: Creating the base table
   category: customer
   image: http://google.com
