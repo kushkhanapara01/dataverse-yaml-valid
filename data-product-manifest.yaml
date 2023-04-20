@@ -1,109 +1,73 @@
+---
 version: 0.0.1
 discoveryPort:
-  name: main branch
-  description: The data product provides average house rental rates in Madrid by house
-    type (Pisos, Aticos, Duplex, etc)
+  name: Duplicate Name validation 4/20/23
+  alias: Duplicate_Name_validation_DP
+  description: Average car price in barcelona
   category: customer
   image: http://google.com
   autofillUserinfo: true
-  tags:
-    - Madrid
-    - House Rental
+  tags: []
   extra: {}
 inputPorts:
-  - alias: input_port_k
+  - alias: car_input_port
     description: string
     tags: []
     extra: {}
     syncType: pull
-    sourceUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
     type: s3
+    sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
     entityId:
-      alias: usersS3
+      alias: car_prices
       createEntity: true
-      entityName: houses_Madrid.parquet
       type: s3-bucket
-      entityPath: s3a://dp-input-bucket/test/houses_Madrid.parquet
+      entityPath: "s3a://dp-input-bucket/user_car_prices_barcelona_2022/"
       entityFilterPatternMatch: "*"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
       fileFormat: parquet
-      incrementalLoad: true
-      delimiter: "|"
-      filter: subtitle != ''
+      delimiter: ","
+      header: true
+      filter: brand = 'BMW'
       processingTimeColumn:
         - processing_time
       actualTimeColumn:
         - processing_time
       projection:
-        - id
-        - title
-        - subtitle
-        - sq_mt_built
-        - sq_mt_useful
-        - rent_price
-        - rent_price_by_area
-        - buy_price
-        - buy_price_by_area
+        - brand
+        - model
+        - engine
+        - year
+        - location
 stateManagement:
-  alias: users_count_by_gender
+  alias: car_prices_barcelona
   refreshInterval: 00 10 * * *
-  retentionVersions: "10"
-  updateStrategy: SCD2
+  updateStrategy: append
   productStoreState:
-    #logicalSchemaUrn: urn:dv:schema:263deedb-916b-40f2-9740-6ee02ce9b8b9
     logicalSchema:
-      type: object
       properties:
-        name:
+        legal_entity:
           type: string
-        gender:
+        store_name:
           type: string
-          enum: [Male, Female]
-        age:
-          type: number
-        city:
+        amount:
+          type: int
+        payment_option:
           type: string
-        zipcode:
-          type: number
-        some_prop:
+        currency:
           type: string
-      required: [name, age, city]
     retentionVersions: "10"
-  updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
-    uniqueKeyColumns:
-      - customer_id
-    changeTrackColumns:
-      - cust_title_desc
-      - cust_birthday
-      - cust_nationality
 transformation:
-  - alias: Transform 1
-  type: SQL
-  description: Join input1 and input2 to get the actual member name
-  query: select * from i1 inner join i2 on i1.id=i2.id
-  references:
-    - alias: input1
-      sqlReference: i1
-    - alias: input2
-      sqlReference: i2
-- alias: Transform 2
-  type: SQL
-  description: Generate the sum of marks on a name level
-  query: select name,sum(marks) from t1 group by name
-  references:
-    - alias: Transform 1
-      sqlReference: t1
+  sql: select * from car_prices
 outputPort:
   channels:
-  - channelType: JDBC
-    queryType: SQL
-  - channelType: REST-API
-    queryType: SQL
+    - channelType: REST-API
+      queryType: SQL
+    - channelType: JDBC
+      queryType: SQL
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
       - referenceAlias: car_prices
-        expression: 'sq'
+        expression: "=="
         number: 100
