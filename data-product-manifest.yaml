@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Duplicate Name validation 4/20/23
+  name: Duplicate Name validation 101
   alias: Duplicate_Name_validation_DP
   description: Average car price in barcelona
   category: customer
