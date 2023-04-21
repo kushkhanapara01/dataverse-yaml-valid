@@ -21,7 +21,7 @@ inputPorts:
     entityId:
       alias: car_prices
       createEntity: true
-      incrementalLoad: false
+      incrementalLoad: true
       incrementalStrategy:
         frequency: 
           - keyReference: asd
