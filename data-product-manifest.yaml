@@ -20,6 +20,11 @@ inputPorts:
     entityId:
       alias: car_prices
       createEntity: true
+      incrementalStrategy:
+        frequency: 
+          - keyReference: asd
+          - mode: absolute
+          - interval: 1
       type: s3-bucket
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityVariables:
