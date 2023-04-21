@@ -78,6 +78,11 @@ stateManagement:
   updateStrategy: append
   productStoreState:
     logicalSchema:
+      properties:
+        brand:
+        engine:
+        year:
+        location:
     retentionVersions: "10"
   updateStrategyOptions:
     entityRef: ${urn:dv:datasource:6d4714c3}:1
