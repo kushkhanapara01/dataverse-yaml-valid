@@ -78,17 +78,6 @@ stateManagement:
   updateStrategy: append
   productStoreState:
     logicalSchema:
-      properties:
-        legal_entity:
-          type: string
-        store_name:
-          type: string
-        amount:
-          type: int
-        payment_option:
-          type: string
-        currency:
-          type: string
     retentionVersions: "10"
   updateStrategyOptions:
     entityRef: ${urn:dv:datasource:6d4714c3}:1
