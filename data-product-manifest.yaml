@@ -2,83 +2,104 @@
 version: 0.0.1
 discoveryPort:
   alias: alias
-  name: DataKK
-  description: Creating the base table
+  name: Run and Test
+  description: Average car price in barcelona
   category: customer
   image: http://google.com
   autofillUserinfo: true
-  tags:
-    - Madrid
-    - House Rental
+  tags: []
   extra: {}
 inputPorts:
-  - alias: Test0001_input_port
+  - alias: car_input_port
     description: string
     tags: []
     extra: {}
     syncType: pull
     type: s3
-    sourceUrn: urn:dv:datasource:1f319ad7-5144-41b5-a2c7-f9d8983e4a58
+#     sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
+    sourceUrn: dataProductUrn: urn:dv:931fe938-4777-48cd-95d7-da5b5a24c365
     entityId:
-      alias: Test0001
+      alias: car_prices
       createEntity: true
-      entityName: test_scd2.csv
+      incrementalLoad: true
+      incrementalStrategy:
+        frequency: 
+          - keyReference: asd
+          - mode: absolute
+          - interval: 1
       type: s3-bucket
-      entityPath: s3://dataverse-byte/sample-data/inputData/test_scd2.csv
-      entityFilterPatternMatch: "*.csv"
+      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      entityVariables:
+        - key: my_dynamic_year
+          value: date-YYYYMMdd
+      entityFilterPatternMatch: "*"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
       fileFormat: csv
       delimiter: ","
       header: true
-      filter: ""
       processingTimeColumn:
-        - created_date
+        - processing_time
       actualTimeColumn:
-        - created_date
+        - processing_time
       projection:
-        - id
-        - name
-        - marks
-        - modified
+        - legal_entity
+        - store_name
+        - amount
+        - payment_option
+        - currency
+  - alias: car_input_port1
+    description: string
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3
+    sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
+    entityId:
+      alias: car_prices
+      createEntity: true
+      type: s3-bucket
+      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      entityVariables:
+        - key: my_dynamic_year
+          value: date-YYYYMMdd
+      entityFilterPatternMatch: "*"
+      sourceSchemaUrn: urn:dv:schema:9d4716d4
+      projectSchemaUrn: urn:dv:schema:9d4716d6
+      fileFormat: csv
+      delimiter: ","
+      header: true
+      processingTimeColumn:
+        - processing_time
+      actualTimeColumn:
+        - processing_time
+      projection:
+        - legal_entity
+        - store_name
+        - amount
+        - payment_option
+        - currency
 stateManagement:
-  alias: Test0001
-  refreshInterval: 45 15 * * *
+  alias: car_prices
+  refreshInterval: "*/10 * * * *"
   updateStrategy: append
-  retentionVersions: "1"
   productStoreState:
     logicalSchema:
-      type: object
       properties:
-        id:
-          type: number
-          description: ID of the property
-        name:
-          type: String
-        marks:
-          type: number
-        modified:
-          type: datetime
-          description: To store the creation date
-      required:
-        - id
+        brand:
+        engine:
+        year:
+        location:
     retentionVersions: "10"
   updateStrategyOptions:
-    uniqueKeyColumns:
-      - id
-    changeTrackColumns:
-      - modified
-transformation:
-  sql: SELECT * FROM Test0001
+    entityRef: ${urn:dv:datasource:6d4714c3}:1
+    tags:
+      - test
 outputPort:
   channels:
     - channelType: REST-API
       queryType: SQL
     - channelType: JDBC
-      queryType: SQL
-dataQualityCheck:
-  RecordCountCheck:
-    stateManagement:
-      referenceAlias: Test0001
-      expression: "=="
-      number: 100
+      queryType: SQL      
+transformation:
+  sql: select * from car_prices
