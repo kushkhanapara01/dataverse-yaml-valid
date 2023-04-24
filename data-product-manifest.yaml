@@ -106,9 +106,9 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      referenceAlias: Test0001_input_port
-      expression: ">="
-      number: 100
+      - referenceAlias: Test0001_input_port
+        expression: ">="
+        number: 100
     stateManagement:
       referenceAlias: Test0001_input_port
       expression: ==
