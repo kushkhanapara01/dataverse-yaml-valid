@@ -40,35 +40,48 @@ discoveryPort:
   autofillUserinfo: true
   extra: {}
 inputPorts:
-  - alias: Test0001_input_port
+  - alias: data-product-as-source
     description: string
     tags: []
     extra: {}
     syncType: pull
-    type: s3
-    sourceUrn: urn:dv:datasource:fab44db9-bc6b-4ec6-8d5b-f26403be914c
-    entityId:
-      alias: Test0001
-      createEntity: true
-      entityName: test_scd2.csv
-      type: s3-bucket
-      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      entityFilterPatternMatch: "*.csv"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: csv
-      delimiter: ","
-      header: true
-      filter: ""
-      processingTimeColumn:
-        - created_date
-      actualTimeColumn:
-        - created_date
-      projection:
-        - id
-        - name
-        - marks
-        - modified
+    type: dataproduct
+    dataProductUrn: urn:dv:datasource:a9e99fe0-4298-4a8b-a19c-1bac758859d7
+    filter: ""
+    projection:
+      - id
+      - name
+      - marks
+      - modified
+#   - alias: Test0001_input_port
+#     description: string
+#     tags: []
+#     extra: {}
+#     syncType: pull
+#     type: s3
+#     sourceUrn: urn:dv:datasource:fab44db9-bc6b-4ec6-8d5b-f26403be914c
+#     entityId:
+#       alias: Test0001
+#       createEntity: true
+#       entityName: test_scd2.csv
+#       type: s3-bucket
+#       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+#       entityFilterPatternMatch: "*.csv"
+#       sourceSchemaUrn: urn:dv:schema:9d4716d4
+#       projectSchemaUrn: urn:dv:schema:9d4716d6
+#       fileFormat: csv
+#       delimiter: ","
+#       header: true
+#       filter: ""
+#       processingTimeColumn:
+#         - created_date
+#       actualTimeColumn:
+#         - created_date
+#       projection:
+#         - id
+#         - name
+#         - marks
+#         - modified
 stateManagement:
   alias: Test0001_input_port
   refreshInterval: 45 15 * * *
