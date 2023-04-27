@@ -146,7 +146,7 @@ dataQualityCheck:
           - column: store_name
   UniqueCombinationCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         checks:
           - columns:
               - store_name
