@@ -87,7 +87,7 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         expression: ">="
         number: 100
     stateManagement:
@@ -96,7 +96,7 @@ dataQualityCheck:
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         checks:
           - column: amount
             expression: ">="
@@ -121,7 +121,7 @@ dataQualityCheck:
           number: 0.99
   UnacceptableTextValueCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         checks:
           - column: payment_option
             valueList:
@@ -140,7 +140,7 @@ dataQualityCheck:
           expression: ">="
   UniquenessCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         checks:
           - column: store_group_name
           - column: store_name
@@ -159,7 +159,7 @@ dataQualityCheck:
             - transaction_Reference
   DistinctValueCountCheck:
     inputPort:
-      - referenceAlias: Test0001
+      - referenceAlias: data-product-as-source
         checks:
           - column: payment_option
             number: 2
