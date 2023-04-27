@@ -40,6 +40,19 @@ discoveryPort:
   autofillUserinfo: true
   extra: {}
 inputPorts:
+  - alias: data-product-as-source
+    description: string
+    tags: []
+    extra: {}
+    syncType: pull
+    type: dataproduct
+    dataProductUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
+    filter: ""
+    projection:
+      - id
+      - name
+      - marks
+      - modified
   - alias: Test0001_input_port
     description: string
     tags: []
