@@ -75,20 +75,17 @@ stateManagement:
   updateStrategy: append
   productStoreState:
     logicalSchema:
-      type: object
       properties:
-        id:
-          type: number
-          description: ID of the property
-        name:
-          type: String
-        marks:
-          type: number
-        modified:
-          type: datetime
-          description: To store the creation date
-      required:
-        - id
+        legal_entity:
+          type: string
+        store_name:
+          type: string
+        amount:
+          type: int
+        payment_option:
+          type: string
+        currency:
+          type: string
   retentionVersions: "10"
   updateStrategyOptions:
     uniqueKeyColumns:
