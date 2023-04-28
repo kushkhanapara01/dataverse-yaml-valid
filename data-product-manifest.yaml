@@ -1,109 +1,191 @@
+---
 version: 0.0.1
 discoveryPort:
-  name: main branch
-  description: The data product provides average house rental rates in Madrid by house
-    type (Pisos, Aticos, Duplex, etc)
-  category: customer
-  image: http://google.com
-  autofillUserinfo: true
+  name: DQ checks for shcedule run 27/04
+  alias: Test0001_input_port
+  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
+  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
     - Madrid
     - House Rental
+  versionInformation: '0.1'
+  urn: urn:dv:dataproduct:6d4714c3
+  organization: MAF
+  createdBy: Neha
+  createdOn: '212249844399'
+  fromMinDataDate: '2022-04-07'
+  toMaxDataDate: '2022-04-14'
+  lastUpdated: '2022-04-07'
+  refreshFrequency: Daily
+  industryDomain: Meteorology
+  function: Forecast
+  regulatoryFields:
+    privacy-PublicOrPrivate: Public
+    customerSpecific-PIIOrnonPII: non-PII
+    origin-MachineGeneratedOrHumanGenerated: Machine generated
+    monetary-FinancialOrnoFinancialData: non-financial
+  qualityInformation:
+    dataAccuracy: 95%
+  authorisation-Information:
+    organization: MAF, Accenture
+    geography:
+      type: state
+      value: Gujarat
+    industryDomain:
+    - Meteorology , Weather
+    refreshInterval: Daily
+    typeofAuthorisation-InclusionExclusion: Inclusion
+  category: customer
+  image: http://google.com
+  autofillUserinfo: true
   extra: {}
 inputPorts:
-  - alias: input_port_k
+  - alias: Test_input_port
     description: string
     tags: []
     extra: {}
     syncType: pull
-    sourceUrn: urn:dv:datasource:3bc63bfe-8dd7-46c3-a0a0-288e5ef1f128
     type: s3
+    sourceUrn: urn:dv:datasource:90f4a383-11d0-40ae-b8fe-202516e89f2f
     entityId:
-      alias: usersS3
+      alias: Test0001
       createEntity: true
-      entityName: houses_Madrid.parquet
+      entityName: test_scd2.csv
       type: s3-bucket
-      entityPath: s3a://dp-input-bucket/test/houses_Madrid.parquet
-      entityFilterPatternMatch: "*"
+      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: parquet
-      incrementalLoad: true
-      delimiter: "|"
-      filter: subtitle != ''
+      fileFormat: csv
+      delimiter: ","
+      header: true
+      filter: ""
       processingTimeColumn:
-        - processing_time
+        - created_date
       actualTimeColumn:
-        - processing_time
+        - created_date
       projection:
         - id
-        - title
-        - subtitle
-        - sq_mt_built
-        - sq_mt_useful
-        - rent_price
-        - rent_price_by_area
-        - buy_price
-        - buy_price_by_area
+        - name
+        - marks
+        - modified
 stateManagement:
-  alias: users_count_by_gender
-  refreshInterval: 00 10 * * *
-  retentionVersions: "10"
-  updateStrategy: SCD2
+  alias: Test0001_input_port
+  refreshInterval: "*/10 * * * *"
+  updateStrategy: append
   productStoreState:
-    #logicalSchemaUrn: urn:dv:schema:263deedb-916b-40f2-9740-6ee02ce9b8b9
     logicalSchema:
       type: object
       properties:
+        id:
+          type: number
+          description: ID of the property
         name:
-          type: string
-        gender:
-          type: string
-          enum: [Male, Female]
-        age:
+          type: String
+        marks:
           type: number
-        city:
-          type: string
-        zipcode:
-          type: number
-        some_prop:
-          type: string
-      required: [name, age, city]
-    retentionVersions: "10"
+        modified:
+          type: datetime
+          description: To store the creation date
+      required:
+        - id
+  retentionVersions: "10"
   updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
     uniqueKeyColumns:
-      - customer_id
+      - id
     changeTrackColumns:
-      - cust_title_desc
-      - cust_birthday
-      - cust_nationality
+      - modified
 transformation:
-  - alias: Transform 1
-  type: SQL
-  description: Join input1 and input2 to get the actual member name
-  query: select * from i1 inner join i2 on i1.id=i2.id
-  references:
-    - alias: input1
-      sqlReference: i1
-    - alias: input2
-      sqlReference: i2
-- alias: Transform 2
-  type: SQL
-  description: Generate the sum of marks on a name level
-  query: select name,sum(marks) from t1 group by name
-  references:
-    - alias: Transform 1
-      sqlReference: t1
+  sql: SELECT * FROM Test0001
 outputPort:
   channels:
-  - channelType: JDBC
-    queryType: SQL
-  - channelType: REST-API
-    queryType: SQL
+    - channelType: REST-API
+      queryType: SQL
+    - channelType: JDBC
+      queryType: SQL
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: car_prices
-        expression: 'sq'
+      - referenceAlias: Test_input_port
+        expression: ">="
         number: 100
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      expression: ==
+      number: 100
+  NullValueCheck:
+    inputPort:
+      - referenceAlias: Test_input_port
+        checks:
+          - column: amount
+            expression: ">="
+            number: 9
+          - column: payment_option
+            expression: ">="
+            number: 8
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: amount
+          expression: ">="
+          number: 0.9
+  NullCombinationCheck:
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - columns:
+            - transaction_reference
+            - order_reference
+          expression: ">="
+          number: 0.99
+  UnacceptableTextValueCheck:
+    inputPort:
+      - referenceAlias: Test_input_port
+        checks:
+          - column: payment_option
+            valueList:
+              - VISA
+              - MASTERCARD
+            number: 0.95
+            expression: ">="
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: payment_option
+          valueList:
+            - MASTERCARD
+            - VISA
+          number: 0.9
+          expression: ">="
+  UniquenessCheck:
+    inputPort:
+      - referenceAlias: Test_input_port
+        checks:
+          - column: store_group_name
+          - column: store_name
+  UniqueCombinationCheck:
+    inputPort:
+      - referenceAlias: Test_input_port
+        checks:
+          - columns:
+              - store_name
+              - transaction_Reference
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - columns:
+            - store_name
+            - transaction_Reference
+  DistinctValueCountCheck:
+    inputPort:
+      - referenceAlias: Test_input_port
+        checks:
+          - column: payment_option
+            number: 2
+            expression: "<="
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: payment_option
+          number: 2
+          expression: "<="
