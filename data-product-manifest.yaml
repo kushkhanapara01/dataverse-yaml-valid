@@ -48,10 +48,8 @@ inputPorts:
     type: s3-csv
     sourceUrn: urn:dv:datasource:fab44db9-bc6b-4ec6-8d5b-f26403be914c
     entityId:
-      alias: Test0001
       createEntity: true
       entityName: test_scd2.csv
-      type: s3-bucket
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
