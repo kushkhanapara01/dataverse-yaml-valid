@@ -1,17 +1,17 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: All DQ hecks Execution Demo 25-04-10 kk
-  alias: Test0001_input_port
+  name: Schedule run DQ cheks - Latest 05/02
+  alias: Test_schedule_run
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
-    - Madrid
-    - House Rental
+    - MAF Data
+    - Schedule Run
   versionInformation: '0.1'
   urn: urn:dv:dataproduct:6d4714c3
   organization: MAF
-  createdBy: Neha
+  createdBy: Ajay
   createdOn: '212249844399'
   fromMinDataDate: '2022-04-07'
   toMaxDataDate: '2022-04-14'
@@ -30,7 +30,7 @@ discoveryPort:
     organization: MAF, Accenture
     geography:
       type: state
-      value: Gujarat
+      value: Bengaluru
     industryDomain:
     - Meteorology , Weather
     refreshInterval: Daily
@@ -40,7 +40,7 @@ discoveryPort:
   autofillUserinfo: true
   extra: {}
 inputPorts:
-  - alias: Test0001_input_port
+  - alias: Test_input_port
     description: string
     tags: []
     extra: {}
@@ -71,21 +71,24 @@ inputPorts:
         - modified
 stateManagement:
   alias: Test0001_input_port
-  refreshInterval: 45 15 * * *
+  refreshInterval: "*/10 * * * *"
   updateStrategy: append
   productStoreState:
     logicalSchema:
+      type: object
       properties:
-        legal_entity:
-          type: string
-        store_name:
-          type: string
-        amount:
-          type: int
-        payment_option:
-          type: string
-        currency:
-          type: string
+        id:
+          type: number
+          description: ID of the property
+        name:
+          type: String
+        marks:
+          type: number
+        modified:
+          type: datetime
+          description: To store the creation date
+      required:
+        - id
   retentionVersions: "10"
   updateStrategyOptions:
     uniqueKeyColumns:
@@ -103,7 +106,7 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         expression: ">="
         number: 100
     stateManagement:
@@ -112,7 +115,7 @@ dataQualityCheck:
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         checks:
           - column: amount
             expression: ">="
@@ -137,7 +140,7 @@ dataQualityCheck:
           number: 0.99
   UnacceptableTextValueCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         checks:
           - column: payment_option
             valueList:
@@ -156,13 +159,13 @@ dataQualityCheck:
           expression: ">="
   UniquenessCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         checks:
           - column: store_group_name
           - column: store_name
   UniqueCombinationCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         checks:
           - columns:
               - store_name
@@ -175,7 +178,7 @@ dataQualityCheck:
             - transaction_Reference
   DistinctValueCountCheck:
     inputPort:
-      - referenceAlias: data-product-as-source
+      - referenceAlias: Test0001
         checks:
           - column: payment_option
             number: 2
