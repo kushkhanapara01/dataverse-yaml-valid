@@ -45,7 +45,7 @@ inputPorts:
     tags: []
     extra: {}
     syncType: pull
-    type: s3-csv
+    type: s3
     sourceUrn: urn:dv:datasource:fab44db9-bc6b-4ec6-8d5b-f26403be914c
     entityId:
       createEntity: true
