@@ -46,7 +46,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    sourceUrn: urn:dv:datasource:fab44db9-bc6b-4ec6-8d5b-f26403be914c
+    sourceUrn: urn:dv:datasource:9e1d4551-ce17-4d6c-9725-a56645988de0
     entityId:
       createEntity: true
       entityName: test_scd2.csv
