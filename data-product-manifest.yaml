@@ -60,9 +60,9 @@ inputPorts:
       incrementalLoad: true
       incrementalStrategy:
         frequency:
-          keyReference : timeStamp
-          mode: "range"
-          interval : -5
+          - keyReference : timeStamp
+            mode: "range"
+            interval : -5
       fileFormat: csv
       delimiter: ","
       header: true
