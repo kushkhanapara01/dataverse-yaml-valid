@@ -54,6 +54,12 @@ inputPorts:
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
+      incrementalLoad: true
+      incrementalStrategy:
+        frequency:
+          keyReference : timeStamp
+          mode: "range"
+          interval : -5
       fileFormat: csv
       delimiter: ","
       header: true
