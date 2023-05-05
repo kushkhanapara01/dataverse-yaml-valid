@@ -54,6 +54,9 @@ inputPorts:
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
+      entityVariables:
+        - key: timeStamp
+          value: date-YYYYMMdd
       incrementalLoad: true
       incrementalStrategy:
         frequency:
