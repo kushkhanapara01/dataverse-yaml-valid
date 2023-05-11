@@ -57,12 +57,6 @@ inputPorts:
       entityVariables:
         - key: timeStamp
           value: date-YYYYMMdd
-      incrementalLoad: true
-      incrementalStrategy:
-        frequency:
-          - keyReference : timeStamp
-            mode: "range"
-            interval : -5
       fileFormat: csv
       delimiter: ","
       header: true
