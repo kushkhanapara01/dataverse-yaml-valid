@@ -46,7 +46,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    dataSetUrn: urn:dv:dataset:f1c142fb-a87b-4a36-8fb7-d66a7cb31337
+    dataSetUrn: urn:dv:dataset:43865a02-f13a-4d26-91dd-3a5e4910555d
     entityId:
       createEntity: true
       entityName: demo_update2.csv
@@ -89,11 +89,11 @@ stateManagement:
         - id
   retentionVersions: "10"
   updateStrategyOptions:
-    uniqueKeyColumns:
-        - id
-    changeTrackColumns:
-        - marks
-    timeTrackColumn: modified
+    uniqueKeyColumns:
+        - id
+    changeTrackColumns:
+        - marks
+    timeTrackColumn: modified
 transformation:
   sql: SELECT * FROM Test0001_input_port
 outputPort:
