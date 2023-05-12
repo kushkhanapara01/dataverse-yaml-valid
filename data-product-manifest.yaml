@@ -89,11 +89,11 @@ stateManagement:
         - id
   retentionVersions: "10"
   updateStrategyOptions:
-    - uniqueKeyColumns:
-      - id
-      changeTrackColumns:
-      - marks
-    timeTrackColumn: modified
+    uniqueKeyColumns:
+        - id
+    changeTrackColumns:
+        - marks
+    timeTrackColumn: modified
 transformation:
   sql: SELECT * FROM Test0001_input_port
 outputPort:
