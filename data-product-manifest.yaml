@@ -70,7 +70,7 @@ inputPorts:
 stateManagement:
   alias: Test0001_input_port
   refreshInterval: "*/30 * * * *"
-  updateStrategy: SCD2
+  updateStrategy: SCD1
   productStoreState:
     logicalSchema:
       type: object
