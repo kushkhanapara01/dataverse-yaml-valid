@@ -73,7 +73,7 @@ inputPorts:
 stateManagement:
   alias: Test0001_input_port
   refreshInterval: "*/10 * * * *"
-  updateStrategy: append
+  updateStrategy: scd2
   productStoreState:
     logicalSchema:
       type: object
