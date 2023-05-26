@@ -146,7 +146,6 @@ productState:
     tags:
       - string
   logicalSchema:
-    type: object
     properties:
       brand: string
       engine: string
