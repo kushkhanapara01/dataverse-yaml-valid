@@ -148,13 +148,9 @@ productState:
   logicalSchema:
     type: object
     properties:
-      id:
-        type: number
-      name:
-        type: String
-      marks:
-        type: number
-      modified:
-        type: datetime
+      brand: string
+      engine: string
+      year: string
+      location: string
   encodingType: HASH
   columnsToEncode: []
