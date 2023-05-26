@@ -146,16 +146,19 @@ productState:
     tags:
       - string
   logicalSchema:
+    type: object
     properties:
-      brand:
-        type: string
-      model:
-        type: string
-      engine:
-        type: string
-      year:
-        type: string
-      location:
-        type: string
+      id:
+        type: number
+        description: ID of the property
+      name:
+        type: String
+      marks:
+        type: number
+      modified:
+        type: datetime
+        description: To store the creation date
+    required:
+      - id
   encodingType: HASH
   columnsToEncode: []
