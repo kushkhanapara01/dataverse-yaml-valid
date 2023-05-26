@@ -150,15 +150,11 @@ productState:
     properties:
       id:
         type: number
-        description: ID of the property
       name:
         type: String
       marks:
         type: number
       modified:
         type: datetime
-        description: To store the creation date
-    required:
-      - id
   encodingType: HASH
   columnsToEncode: []
