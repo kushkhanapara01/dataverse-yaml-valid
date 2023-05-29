@@ -1,7 +1,7 @@
 version: 0.1.0
 alias: Test0001
 discoveryPort:
-  name: Weather Forecast12asdasd
+  name: Weather22
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: >-
     Weather Forecast of the next 7 days for ahmedabad city along with the
@@ -66,7 +66,7 @@ inputPorts:
         mergeSchema: true
 productState:
   refreshInterval: 0/15 * * * *
-  updateStrategy: scd2
+  updateStrategy: append
   updateStrategyOptions:
     uniqueKeyColumns:
       - id
