@@ -268,5 +268,5 @@ controlPort:
             expression: '>='
 outputPort:
   subscriptionChannels:
-    channelType: JDBC
-    queryType: SQL
+    - channelType: JDBC
+      queryType: SQL
