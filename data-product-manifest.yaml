@@ -70,7 +70,8 @@ productState:
   updateStrategyOptions:
     uniqueKeyColumns:
       - id
-    actualTimeColumn: modified
+    actualTimeColumn:
+      - id
     changeTrackingColumns:
       - marks
     timeTrackingColumn: modified
@@ -266,4 +267,7 @@ controlPort:
           - column: colA
             number: 3
             expression: '>='
-outputPort: {}
+outputPort:
+  subscriptionChannels:
+    channelType: JDBC
+    queryType: SQL
