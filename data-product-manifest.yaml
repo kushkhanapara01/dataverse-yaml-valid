@@ -62,24 +62,6 @@ inputPorts:
       value: date-YYYYMMdd
     advanceOptions:
       mergeSchema: true
-- alias: car_data_product
-  description: Read Iceberg Table
-  tags: []
-  syncType: pull
-  type: dataproduct
-  dataProductUrn: urn:dv:dataproduct:22964c68-46f1-4e3c-b90b-e3d59a57e6fd
-  filter: ''
-  projection: []
-- alias: car_data_product1
-  description: Read Iceberg Table
-  tags: []
-  syncType: pull
-  type: dataproduct
-  dataProductUrn: urn:dv:dataproduct:22964c68-46f1-4e3c-b90b-e3d59a57e6fd
-  filter: bhp > 500
-  projection:
-  - name
-  - brand
 productState:
   refreshInterval: 0/15 * * * *
   updateStrategy: scd2
