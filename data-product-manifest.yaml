@@ -145,7 +145,7 @@ controlPort:
           expression: <=
           number: 200
       productState:
-        referenceAlias: car_prices_barcelona
+        referenceAlias: Test0001
         expression: ==
         number: 100
     NullValueCheck:
@@ -194,7 +194,7 @@ controlPort:
               number: 0.5
               expression: '>='
       productState:
-        referenceAlias: car_prices_barcelona
+        referenceAlias: Test0001
         checks:
           - column: colA
             valueList:
@@ -230,7 +230,7 @@ controlPort:
                 - colD
                 - colE
       productState:
-        referenceAlias: car_prices_barcelona
+        referenceAlias: Test0001
         checks:
           - columns:
               - colA
@@ -258,7 +258,7 @@ controlPort:
               number: 4
               expression: '>='
       productState:
-        referenceAlias: car_prices_barcelona
+        referenceAlias: Test0001
         checks:
           - column: colA
             number: 3
