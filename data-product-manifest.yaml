@@ -70,9 +70,11 @@ productState:
   updateStrategyOptions:
     uniqueKeyColumns:
       - id
-    changeTrackColumns:
+    actualTimeColumn:
+      - id
+    changeTrackingColumns:
       - marks
-    timeTrackColumn: modified
+    timeTrackingColumn: modified
   logicalSchema:
     schemaDefinition:
       - version: 1
