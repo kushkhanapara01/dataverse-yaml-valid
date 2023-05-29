@@ -24,7 +24,7 @@ discoveryPort:
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
 inputPorts:
-  - alias: test_manifest_csv
+  - alias: car_prices_csv
     description: string
     tags: []
     syncType: pull
@@ -44,7 +44,7 @@ inputPorts:
       variables:
         - key: timeStamp
           value: date-YYYYMMdd
-  - alias: test_manifest_parquet
+  - alias: car_prices
     description: string
     tags: []
     syncType: pull
