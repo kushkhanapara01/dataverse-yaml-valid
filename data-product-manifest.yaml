@@ -33,7 +33,7 @@ inputPorts:
         - key: timeStamp
           value: date-YYYYMMdd
       advanceOptions:
-        delimiter: '|'
+        delimiter: ','
         header: true
 productState:
   refreshInterval: "*/10 * * * *"
