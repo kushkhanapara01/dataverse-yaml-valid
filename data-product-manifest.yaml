@@ -3,7 +3,7 @@ version: 0.1.0
 alias: Test0001_input_port_k001
 discoveryPort:
   name: Schedule run DQ checks_k001
-  alias: Test_schedule_run
+  alias: Test_schedule_run_k001
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
