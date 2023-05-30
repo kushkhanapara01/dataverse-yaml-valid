@@ -41,6 +41,7 @@ inputPorts:
         s3a://dataverse-byte/sample-data/inputData/PMS_Transaction_Data.csv
       advanceOptions:
         delimiter: '|'
+        header: true
       variables:
         - key: timeStamp
           value: date-YYYYMMdd
