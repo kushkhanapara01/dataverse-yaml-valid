@@ -27,6 +27,12 @@ inputPorts:
     tags: []
     syncType: pull
     dataSetUrn: urn:dv:dataset:90244889-d1bf-4f87-a046-160928e08bd0
+    incrementalLoad: true
+    incrementalStrategy:
+      frequency:
+        - keyReference: timeStamp
+          mode: range
+          interval: -5
     entity:
       path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       variables:
