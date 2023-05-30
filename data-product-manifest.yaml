@@ -75,14 +75,6 @@ transformation:
     references:
       - alias: car_prices_csv
         sqlReference: car_prices_csv
-  - alias: car_price_step_2
-    description: step_2
-    query: SELECT * FROM car_prices
-    type: SQL
-    sequenceNo: '2'
-    references:
-      - alias: car_prices
-        sqlReference: car_prices
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
