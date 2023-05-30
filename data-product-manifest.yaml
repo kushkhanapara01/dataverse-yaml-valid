@@ -66,30 +66,8 @@ inputPorts:
         mergeSchema: true
 productState:
   refreshInterval: 0/15 * * * *
-  updateStrategy: scd2
-  updateStrategyOptions:
-    uniqueKeyColumns:
-      - id
-    actualTimeColumn: id
-    changeTrackingColumns:
-      - marks
-    timeTrackingColumn: modified
+  updateStrategy: append
   logicalSchema:
-    schemaDefinition:
-      - version: 1
-        structure:
-          properties:
-            brand:
-              type: string
-            model:
-              type: string
-            engine:
-              type: string
-            year:
-              type: string
-            location:
-              type: string
-        isActive: true
     properties:
       brand:
         type: string
