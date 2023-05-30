@@ -62,11 +62,11 @@ productState:
         type: string
   encodingType: HASH
   columnsToEncode:
-    - Gran_Period
-    - DNName
+    - gran_period
+    - dnname
   partitionColumns:
-    - Gran_Period
-    - DNName
+    - gran_period
+    - dnname
 transformation:
   - alias: car_price_step_1
     description: step_1
@@ -91,21 +91,21 @@ controlPort:
       inputPort:
         - referenceAlias: car_prices_csv
           checks:
-            - column: DNName
+            - column: dnname
               valueList:
-                - DN_NAME_1
-                - DN_NAME_2
-                - DN_NAME_3
+                - dn_name_1
+                - dn_name_2
+                - dn_name_3
               number: 0.5
               expression: '>='
       productState:
         referenceAlias: Test0001
         checks:
-          - column: DNName
+          - column: dnname
             valueList:
-              - DN_NAME_1
-              - DN_NAME_2
-              - DN_NAME_3
+              - dn_name_1
+              - dn_name_2
+              - dn_name_3
             number: 0.5
             expression: '>='
     UniqueCombinationCheck:
@@ -113,18 +113,18 @@ controlPort:
         - referenceAlias: car_prices_csv
           checks:
             - columns:
-                - NEName
+                - nename
     DistinctValueCountCheck:
       inputPort:
         - referenceAlias: car_prices_csv
           checks:
-            - column: Gran_Period
+            - column: gran_period
               number: 30
               expression: '>='
       productState:
         referenceAlias: Test0001
         checks:
-          - column: Gran_Period
+          - column: gran_period
             number: 30
             expression: '>='
 outputPort:
