@@ -38,7 +38,7 @@ inputPorts:
           interval: -5
     entity:
       path: >-
-        s3a://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
+        s3a://dataverse-byte/sample-data/inputData/PMS_Transaction_Data.csv
       advanceOptions:
         delimiter: '|'
       variables:
@@ -61,11 +61,11 @@ productState:
         type: string
   encodingType: HASH
   columnsToEncode:
-    - A
-    - B
+    - Gran_Period
+    - DNName
   partitionColumns:
-    - A
-    - B
+    - Gran_Period
+    - DNName
 transformation:
   - alias: car_price_step_1
     description: step_1
@@ -79,140 +79,52 @@ controlPort:
   dataQualityCheck:
     RecordCountCheck:
       inputPort:
-        - referenceAlias: car_prices
-          expression: ==
-          number: 100
         - referenceAlias: car_prices_csv
-          expression: <=
-          number: 200
-      transformation:
-        - referenceAlias: trans_step
-          expression: ==
-          number: 100
-        - referenceAlias: trans_step
           expression: <=
           number: 200
       productState:
         referenceAlias: Test0001
         expression: ==
         number: 100
-    NullValueCheck:
-      inputPort:
-        - referenceAlias: car_prices
-          checks:
-            - column: id
-              expression: '>='
-              number: 90
-            - column: name
-              expression: '>='
-              number: 90
     UnacceptableTextValueCheck:
       inputPort:
-        - referenceAlias: car_prices
+        - referenceAlias: car_prices_csv
           checks:
-            - column: colA
+            - column: DNName
               valueList:
-                - A
-                - B
-                - C
-              number: 0.5
-              expression: '>='
-            - column: colA
-              valueList:
-                - A
-                - B
-                - C
-              number: 0.5
-              expression: '>='
-      transformation:
-        - referenceAlias: car_prices
-          checks:
-            - column: colA
-              valueList:
-                - A
-                - B
-                - C
-              number: 0.5
-              expression: '>='
-            - column: colA
-              valueList:
-                - A
-                - B
-                - C
+                - DN_NAME_1
+                - DN_NAME_2
+                - DN_NAME_3
               number: 0.5
               expression: '>='
       productState:
         referenceAlias: Test0001
         checks:
-          - column: colA
+          - column: DNName
             valueList:
-              - A
-              - B
-              - C
-            number: 0.5
-            expression: '>='
-          - column: colA
-            valueList:
-              - A
-              - B
-              - C
+              - DN_NAME_1
+              - DN_NAME_2
+              - DN_NAME_3
             number: 0.5
             expression: '>='
     UniqueCombinationCheck:
       inputPort:
-        - referenceAlias: car_prices
+        - referenceAlias: car_prices_csv
           checks:
             - columns:
-                - colA
-                - colB
-            - columns:
-                - colD
-                - colE
-      transformation:
-        - referenceAlias: trans_ref
-          checks:
-            - columns:
-                - colA
-                - colB
-            - columns:
-                - colD
-                - colE
-      productState:
-        referenceAlias: Test0001
-        checks:
-          - columns:
-              - colA
-              - colB
-          - columns:
-              - colA
-              - colB
+                - NEName
     DistinctValueCountCheck:
       inputPort:
-        - referenceAlias: car_prices
+        - referenceAlias: car_prices_csv
           checks:
-            - column: colA
-              number: 3
-              expression: '>='
-            - column: colC
-              number: 2
-              expression: '>='
-      transformation:
-        - referenceAlias: trans_ref
-          checks:
-            - column: colA
-              number: 3
-              expression: '>='
-            - column: colB
-              number: 4
+            - column: Gran_Period
+              number: 30
               expression: '>='
       productState:
         referenceAlias: Test0001
         checks:
-          - column: colA
-            number: 3
-            expression: '>='
-          - column: colA
-            number: 3
+          - column: Gran_Period
+            number: 30
             expression: '>='
 outputPort:
   subscriptionChannels:
