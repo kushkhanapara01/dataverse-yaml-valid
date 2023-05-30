@@ -60,8 +60,6 @@ productState:
         type: string
       location:
         type: string
-  encodingType: HASH
-  columnsToEncode: []
 transformation:
   - alias: car_price_step_1
     description: step_1
