@@ -38,7 +38,7 @@ inputPorts:
           interval: -5
     entity:
       path: >-
-        s3a://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_account/
+        s3a://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
       advanceOptions:
         delimiter: '|'
       variables:
@@ -58,7 +58,7 @@ inputPorts:
           interval: -5
     entity:
       path: >-
-        s3a://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_account/
+        s3a://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
       variables:
         - key: timeStamp
           value: date-YYYYMMdd
