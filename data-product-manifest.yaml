@@ -1,5 +1,5 @@
 version: 0.1.0
-alias: Test000100123
+alias: Test987
 discoveryPort:
   name: Weather Forecst1
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
