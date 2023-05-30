@@ -23,6 +23,7 @@ discoveryPort:
 inputPorts:
   - alias: Test_input_port
     description: string
+    type: s3-csv
     tags: []
     syncType: pull
     type: s3
@@ -49,7 +50,14 @@ productState:
       modified:
         type: datetime
 transformation:
-  sql: SELECT * FROM Test0001
+  - alias: Test_input_port_trans
+    description: step_1
+    type: SQL
+    sequenceNo: '1'
+    query: SELECT * FROM Test_input_port
+    references:
+      - alias: Test_input_port
+        sqlReference: Test_input_port        
 outputPort:
   subscriptionChannels:
     - channelType: JDBC
