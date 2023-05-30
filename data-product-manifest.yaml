@@ -44,26 +44,6 @@ inputPorts:
       variables:
         - key: timeStamp
           value: date-YYYYMMdd
-  - alias: car_prices
-    description: string
-    tags: []
-    syncType: pull
-    type: s3-parquet
-    dataSetUrn: urn:dv:dataset:90244889-d1bf-4f87-a046-160928e08bd0
-    incrementalLoad: true
-    incrementalStrategy:
-      frequency:
-        - keyReference: timeStamp
-          mode: range
-          interval: -5
-    entity:
-      path: >-
-        s3a://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
-      advanceOptions:
-        mergeSchema: true
 productState:
   refreshInterval: 0/15 * * * *
   updateStrategy: append
