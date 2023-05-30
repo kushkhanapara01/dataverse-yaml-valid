@@ -101,32 +101,30 @@ productState:
         type: string
       location:
         type: string
-  encodingType:
-    encodingType: HASH
-    columnsToEncode:
-      - A
-      - B
+  encodingType: HASH
+  columnsToEncode:
+    - A
+    - B
   partitionColumns:
     - A
     - B
-  columnsToEncode: []
 transformation:
   - alias: car_price_step_1
     description: step_1
     type: SQL
     sequenceNo: '1'
-    query: SELECT * FROM car_input_port
+    query: SELECT * FROM car_prices_csv
     references:
-      - alias: car_input_port
-        sqlReference: car_input_port
+      - alias: car_prices_csv
+        sqlReference: car_prices_csv
   - alias: car_price_step_2
     description: step_2
-    query: SELECT * FROM car_price_step_1
+    query: SELECT * FROM car_prices
     type: SQL
     sequenceNo: '2'
     references:
-      - alias: car_price_step_1
-        sqlReference: car_price_step_1
+      - alias: car_prices
+        sqlReference: car_prices
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
