@@ -61,12 +61,7 @@ productState:
       location:
         type: string
   encodingType: HASH
-  columnsToEncode:
-    - gran_period
-    - dnname
-  partitionColumns:
-    - gran_period
-    - dnname
+  columnsToEncode: []
 transformation:
   - alias: car_price_step_1
     description: step_1
@@ -77,56 +72,7 @@ transformation:
       - alias: car_prices_csv
         sqlReference: car_prices_csv
 controlPort:
-  dataQualityCheck:
-    RecordCountCheck:
-      inputPort:
-        - referenceAlias: car_prices_csv
-          expression: <=
-          number: 200
-      productState:
-        referenceAlias: Test0001
-        expression: ==
-        number: 100
-    UnacceptableTextValueCheck:
-      inputPort:
-        - referenceAlias: car_prices_csv
-          checks:
-            - column: dnname
-              valueList:
-                - dn_name_1
-                - dn_name_2
-                - dn_name_3
-              number: 0.5
-              expression: '>='
-      productState:
-        referenceAlias: Test0001
-        checks:
-          - column: dnname
-            valueList:
-              - dn_name_1
-              - dn_name_2
-              - dn_name_3
-            number: 0.5
-            expression: '>='
-    UniqueCombinationCheck:
-      inputPort:
-        - referenceAlias: car_prices_csv
-          checks:
-            - columns:
-                - nename
-    DistinctValueCountCheck:
-      inputPort:
-        - referenceAlias: car_prices_csv
-          checks:
-            - column: gran_period
-              number: 30
-              expression: '>='
-      productState:
-        referenceAlias: Test0001
-        checks:
-          - column: gran_period
-            number: 30
-            expression: '>='
+  dataQualityCheck: {}
 outputPort:
   subscriptionChannels:
     - channelType: JDBC
