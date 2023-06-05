@@ -68,16 +68,17 @@ outputPort:
     - channelType: JDBC
       queryType: SQL
 controlPort:
-  contractID : A unique id for contract
-  startDate: starting date and time of the contract
-  endDate: ending date and time for the contract
-  owner: Data Product owner's wallet address
-  consumer: Data Product consumer's wallet address
-  dataProductURN: Data Product ID
-  dataProductTokenID: Data product NFT token id
-  consumptionType: Type of consumption, API, File etc.
-  consumptionLimit: Consumption limit for specified frequency eg, 100 API calls a day
-  consumptionLimitFrequency: Frequency for consumption limit eg. Daily, Weekly, Monthly etc.
+  contractDetails:
+    contractID : A unique id for contract
+    startDate: starting date and time of the contract
+    endDate: ending date and time for the contract
+    owner: Data Product owner's wallet address
+    consumer: Data Product consumer's wallet address
+    dataProductURN: Data Product ID
+    dataProductTokenID: Data product NFT token id
+    consumptionType: Type of consumption, API, File etc.
+    consumptionLimit: Consumption limit for specified frequency eg, 100 API calls a day
+    consumptionLimitFrequency: Frequency for consumption limit eg. Daily, Weekly, Monthly etc.
   dataQualityCheck:
     RecordCountCheck:
       inputPort:
