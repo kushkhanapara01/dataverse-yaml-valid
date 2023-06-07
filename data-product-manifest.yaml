@@ -1,6 +1,6 @@
 ---
 version: 0.1.0
-alias: SCD2_testing
+alias: SCD2_testing_123
 discoveryPort:
   name: SCD2 changes implementation Verification 31 May Test 1
   alias: Test0001_input_port
