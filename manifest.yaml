@@ -1,0 +1,77 @@
+version: 1.0.0
+alias: ""
+discoveryPort:
+  name: Test Source Aligned Data Product
+  description: ""
+  category: ""
+  image: ""
+  autofillUserinfo: ""
+  tags: []
+  extra: {}
+  createdBy:
+    name: ""
+    userid: ""
+    email: ""
+  createdTs: ""
+  updatedTs: ""
+inputPorts:
+  - alias: Delimited$1
+    description: MDQ vs Actual SOH
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:393c056e-8a0e-4ced-b48d-0af88f9d89ef
+    incrementalStrategy: {}
+    filter: ""
+    projection: []
+    entity:
+      createEntity: true
+      path: "This is a ##sample## string with ##multiple## values."
+      variables:
+        - key: sample
+          value: ""
+      advanceOptions:
+        delimiter: "|"
+        header: true
+productState:
+  refreshInterval: ""
+  logicalSchemaUrn: ""
+  retentionVersions: ""
+  updateStrategy: ""
+  logicalSchema: ""
+  productStoreState:
+    enforceSchemaMethod: ""
+  updateStrategyOptions:
+    - entityRef: ""
+      uniqueKeyColumns: []
+      changeTrackColumns: []
+      timeTrackColumn: ""
+transformation:
+  - alias: Filter$1
+    type: ""
+    description: ""
+controlPort:
+  dataQualityCheck:
+    tableId:
+      inputPort:
+        - checks: 2878
+          referenceAlias: Delimited$1
+    enable:
+      inputPort:
+        - checks: true
+          referenceAlias: Delimited$1
+      transformation:
+        - checks: false
+          referenceAlias: Filter$1
+    RecordCountCheck:
+      inputPort:
+        - checks:
+            expression: ">="
+            number: 5
+          referenceAlias: Delimited$1
+      transformation:
+        - checks:
+            expression: ">="
+            number: 10
+          referenceAlias: Filter$1
