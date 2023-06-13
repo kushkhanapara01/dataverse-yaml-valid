@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf_2020
+alias: Test_kk_maf_2020545
 discoveryPort:
-  name: Test_kk_maf_22020
+  name: Test_kk_maf_220204645
   alias: Test_kk_maf_2
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
