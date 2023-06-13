@@ -30,7 +30,10 @@ inputPorts:
     incrementalLoad: true
     incrementalStrategy:
       frequency:
-        - keyReference: timeStamp
+        - keyReference: sample
+          mode: range
+          interval: -5
+        - keyReference: multiple
           mode: range
           interval: -5
     entity:
