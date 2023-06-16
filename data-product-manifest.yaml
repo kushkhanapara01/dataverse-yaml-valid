@@ -82,7 +82,7 @@ controlPort:
     consumptionType: Type of consumption, API, File etc.
     consumptionLimit: Consumption limit for specified frequency eg, 100 API calls a day
     consumptionLimitFrequency: Frequency for consumption limit eg. Daily, Weekly, Monthly etc.
-  dataQualityCheck:
+  dataQualityRules:
     RecordCountCheck:
       inputPort:
         - referenceAlias: Test_input_port
