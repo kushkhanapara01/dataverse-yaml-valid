@@ -36,7 +36,6 @@ inputPorts:
 productState:
   alias: Load final PMS State
   refreshInterval: ""
-  logicalSchemaUrn: ""
   retentionVersions: ""
   updateStrategy: scd1
   logicalSchema: {}
