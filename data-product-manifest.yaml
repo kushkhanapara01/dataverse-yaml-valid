@@ -15,24 +15,26 @@ discoveryPort:
   createdTs: ""
   updatedTs: ""
 inputPorts:
-  - alias: PMSTransactions1
-    description: PMS Transactions
-    tags: []
-    extra: {}
-    syncType: pull
+  - alias: Test0001_input_port
+    description: dqcheck
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
-    filter: ""
-    projection: []
-  - alias: PMSMaster1
-    description: PMS Transactions
     tags: []
-    extra: {}
     syncType: pull
-    type: s3-csv
-    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
-    filter: ""
-    projection: []
+    dataSetUrn: urn:dv:dataset:7eb2db7c-a3b1-4f91-9d0b-6c45faa4e9bb
+    entity:
+      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
+      variables:
+        - key: timeStamp
+          value: date-YYYYMMdd
+      advanceOptions:
+        delimiter: ','
+        header: true
+      filter: ""
+      projection:
+        - id
+        - name
+        - marks
+        - modified
 productState:
   alias: Load final PMS State
   refreshInterval: ""
