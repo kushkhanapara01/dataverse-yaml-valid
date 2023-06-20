@@ -43,10 +43,10 @@ productState:
   productStoreState:
     enforceSchemaMethod: Warning
   updateStrategyOptions:
-    - uniqueKeyColumns: []
-      changeTrackingColumns: []
-      timeTrackingColumn: ""
-      actualTimeColumn: ""
+    uniqueKeyColumns: []
+    changeTrackingColumns: []
+    timeTrackingColumn: ""
+    actualTimeColumn: ""
 transformation:
   - alias: Join1
     type: ""
