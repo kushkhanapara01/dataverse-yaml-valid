@@ -1,5 +1,5 @@
 version: 0.1.0
-alias: Load final PMS State
+alias: Load_final_PMS_State
 discoveryPort:
   name: PMS
   description: ""
@@ -39,7 +39,7 @@ productState:
   logicalSchemaUrn: ""
   retentionVersions: ""
   updateStrategy: append
-  logicalSchema: ""
+  logicalSchema: {}
   productStoreState:
     enforceSchemaMethod: Warning
   updateStrategyOptions:
