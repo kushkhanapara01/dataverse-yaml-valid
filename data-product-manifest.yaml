@@ -38,15 +38,15 @@ productState:
   refreshInterval: ""
   logicalSchemaUrn: ""
   retentionVersions: ""
-  updateStrategy: append
+  updateStrategy: scd1
   logicalSchema: {}
   productStoreState:
     enforceSchemaMethod: Warning
   updateStrategyOptions:
-    - entityRef: ""
-      uniqueKeyColumns: []
-      changeTrackColumns: []
-      timeTrackColumn: ""
+    - uniqueKeyColumns: []
+      changeTrackingColumns: []
+      timeTrackingColumn: ""
+      actualTimeColumn: ""
 transformation:
   - alias: Join1
     type: ""
