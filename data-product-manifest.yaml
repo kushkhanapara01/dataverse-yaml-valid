@@ -31,18 +31,8 @@ inputPorts:
     syncType: pull
     type: s3-csv
     dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
-    incrementalStrategy: {}
     filter: ""
     projection: []
-    entity:
-      createEntity: true
-      path: s3://bp-spark-sql-library-test-acc/PMS_Transaction_Data.csv
-      variables:
-        - key: ""
-          value: ""
-      advanceOptions:
-        delimiter: ","
-        header: false
 productState:
   alias: Load final PMS State
   refreshInterval: ""
