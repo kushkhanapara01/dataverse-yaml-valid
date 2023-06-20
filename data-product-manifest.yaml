@@ -1,7 +1,7 @@
-version: 1.0.0
-alias: ""
+version: 0.1.0
+alias: Load final PMS State
 discoveryPort:
-  name: Test Source Aligned Data Product
+  name: PMS
   description: ""
   category: ""
   image: ""
@@ -15,63 +15,82 @@ discoveryPort:
   createdTs: ""
   updatedTs: ""
 inputPorts:
-  - alias: Delimited$1
-    description: MDQ vs Actual SOH
+  - alias: PMSTransactions1
+    description: PMS Transactions
     tags: []
     extra: {}
     syncType: pull
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:393c056e-8a0e-4ced-b48d-0af88f9d89ef
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
     incrementalStrategy: {}
     filter: ""
     projection: []
     entity:
       createEntity: true
-      path: "This is a ##sample## string with ##multiple## values."
+      path: s3://bp-spark-sql-library-test-acc/PMS_Transaction_Data.csv
       variables:
-        - key: sample
+        - key: ""
           value: ""
       advanceOptions:
-        delimiter: "|"
-        header: true
+        delimiter: ","
+        header: false
+  - alias: PMSMaster1
+    description: PMS Transactions
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
+    incrementalStrategy: {}
+    filter: ""
+    projection: []
+    entity:
+      createEntity: true
+      path: s3://bp-spark-sql-library-test-acc/PMS_Transaction_Data.csv
+      variables:
+        - key: ""
+          value: ""
+      advanceOptions:
+        delimiter: ","
+        header: false
 productState:
+  alias: Load final PMS State
   refreshInterval: ""
   logicalSchemaUrn: ""
   retentionVersions: ""
-  updateStrategy: ""
+  updateStrategy: append
   logicalSchema: ""
   productStoreState:
-    enforceSchemaMethod: ""
+    enforceSchemaMethod: Warning
   updateStrategyOptions:
     - entityRef: ""
       uniqueKeyColumns: []
       changeTrackColumns: []
       timeTrackColumn: ""
 transformation:
-  - alias: Filter$1
+  - alias: Join1
     type: ""
-    description: ""
+    description: Join PMS Master and transaction
+  - alias: SelectColumns1
+    type: ""
+    description: Select required columns for joined PMS
 controlPort:
   dataQualityCheck:
     tableId:
-      inputPort:
-        - checks: 2878
-          referenceAlias: Delimited$1
+      stateManagement:
+        checks: 2865
     enable:
-      inputPort:
-        - checks: true
-          referenceAlias: Delimited$1
-      transformation:
-        - checks: false
-          referenceAlias: Filter$1
+      stateManagement:
+        checks: true
     RecordCountCheck:
-      inputPort:
-        - checks:
-            expression: ">="
-            number: 5
-          referenceAlias: Delimited$1
-      transformation:
-        - checks:
-            expression: ">="
-            number: 10
-          referenceAlias: Filter$1
+      stateManagement:
+        checks:
+          expression: ">="
+          number: 220
+    NullValueCheck:
+      stateManagement:
+        checks:
+          - column: NEName
+            expression: ==
+            number: 100
+            stepsToFix: Fix on your own
