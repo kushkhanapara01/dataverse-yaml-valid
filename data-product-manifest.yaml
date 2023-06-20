@@ -50,9 +50,11 @@ transformation:
   - alias: Join1
     type: ""
     description: Join PMS Master and transaction
+    query: ""
   - alias: SelectColumns1
     type: ""
     description: Select required columns for joined PMS
+    query: ""
 controlPort:
   dataQualityCheck:
     tableId:
