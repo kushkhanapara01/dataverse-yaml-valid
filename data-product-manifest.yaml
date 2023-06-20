@@ -59,12 +59,6 @@ transformation:
     query: ""
 controlPort:
   dataQualityCheck:
-    tableId:
-      stateManagement:
-        checks: 2865
-    enable:
-      stateManagement:
-        checks: true
     RecordCountCheck:
       stateManagement:
         checks:
