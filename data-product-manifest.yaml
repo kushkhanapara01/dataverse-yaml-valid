@@ -1,71 +1,93 @@
 version: 0.1.0
 alias: Load_final_PMS_State
 discoveryPort:
-  name: PMS
-  description: ""
-  category: ""
-  image: ""
+  name: PMS_1
+  shortDescription: ShortDescription
+  longDescription: LongDescriptionDescription
+  industryDomain: "inDomaiin"
+  regulatoryFields:
+    dataPrivacy: public
+    customerInfo: nonPII
+    dataOrigin: machineGenerated
+    monetaryInfo: nonFinancialData
+  function: abc
+  image: https://google.com
   autofillUserinfo: ""
-  tags: []
+  tags: ['Tag1']
   extra: {}
-  createdBy:
-    name: ""
-    userid: ""
-    email: ""
-  createdTs: ""
-  updatedTs: ""
+  createdTs: 1687281186
+  updatedTs: 1687281186
 inputPorts:
-  - alias: Test0001_input_port
-    description: dqcheck
-    type: s3-csv
+  - alias: PMS_Transactions_1
+    description: PMS Transactions
     tags: []
+    extra: {}
     syncType: pull
-    dataSetUrn: urn:dv:dataset:7eb2db7c-a3b1-4f91-9d0b-6c45faa4e9bb
-    entity:
-      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
-      advanceOptions:
-        delimiter: ','
-        header: true
-      filter: ""
-      projection:
-        - id
-        - name
-        - marks
-        - modified
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
+    filter: ""
+    projection: []
+  - alias: PMS_Master_1
+    description: PMS Transactions
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
+    filter: ""
+    projection: []
 productState:
   alias: Load final PMS State
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: scd1
-  logicalSchema: {}
+  updateStrategy: append
+  logicalSchema:
+    properties:
+      DNID:
+        type: STRING
+      DNName:
+        type: STRING
+      NEName:
+        type: STRING
+      InitTime:
+        type: STRING
+      State:
+        type: STRING
+      City:
+        type: STRING
   productStoreState:
     enforceSchemaMethod: Warning
-  updateStrategyOptions:
-    actualTimeColumn: nothing
-    uniqueKeyColumns:
-        - id
-    changeTrackingColumns:
-        - marks
-    timeTrackingColumn: modified
+  isProfilingEnabled: true
 transformation:
-  - alias: Join1
-    type: ""
-    description: Join PMS Master and transaction
-    query: ""
-  - alias: SelectColumns1
-    type: ""
-    description: Select required columns for joined PMS
-    query: ""
+  - alias: Spark_SQL_1
+    type: SQL
+    description: Join transaction and master
+    query: select DNID,DNName,NEName,InitTime,State,City from pmstransaction pmt
+      left join pmsmaster pmm on pmt.nename = pmm.sap_id_name
+    references:
+      - inputDataFrame: PMS$Transactions$1
+        tempViewName: pmstransaction
+      - inputDataFrame: PMS$Master$1
+        tempViewName: pmsmaster
+outputPort:
+  subscriptionChannels:
+    - channelType: REST-API
+      queryType: SQL
+    - channelType: JDBC
+      queryType: SQL
 controlPort:
   dataQualityCheck:
+    tableId:
+      stateManagement:
+        checks: 2865
+    enable:
+      stateManagement:
+        checks: true
     RecordCountCheck:
       stateManagement:
         checks:
           expression: ">="
-          number: 220
+          number: 227
     NullValueCheck:
       stateManagement:
         checks:
