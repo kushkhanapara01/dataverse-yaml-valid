@@ -26,7 +26,7 @@ inputPorts:
     type: s3-csv
     tags: []
     syncType: pull
-    dataSetUrn: urn:dv:dataset:393c056e-8a0e-4ced-b48d-0af88f9d89ef
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
     incrementalLoad: true
     incrementalStrategy:
       frequency:
@@ -36,14 +36,6 @@ inputPorts:
         - keyReference: multiple
           mode: range
           interval: -5
-    entity:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
-      advanceOptions:
-        delimiter: ','
-        header: true
 productState:
   refreshInterval: "*/10 * * * *"
   updateStrategy: append
