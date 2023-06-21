@@ -1,7 +1,7 @@
 version: 0.1.0
-alias: Load_final_PMS_State
+alias: Load_final_PMS_State2
 discoveryPort:
-  name: PMS_1
+  name: PMS_12
   shortDescription: ShortDescription
   longDescription: LongDescriptionDescription
   industryDomain: "inDomaiin"
