@@ -1,10 +1,10 @@
 version: 0.1.0
-jobId: "572"
-jobName: Test Source Aligned 4
+jobId: "571"
+jobName: Source Aligned DP 3
 jobType: Source Aligned Data Product
-alias: Test_Iceberg_Table
+alias: test_icerberg
 discoveryPort:
-  name: Test Source Aligned 4
+  name: Source Aligned DP 3
   description: ""
   category: ""
   image: https://google.com
@@ -12,17 +12,17 @@ discoveryPort:
   tags: []
   extra: {}
 inputPorts:
-  - alias: Test_4_1
-    description: Test 4
+  - alias: test_dataset_3_1
+    description: test dataset 3
     tags: []
     extra: {}
     syncType: pull
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:a773900a-38e9-4e56-942c-04c73362b711
+    dataSetUrn: urn:dv:dataset:58967f92-0928-48d9-89cc-659502378411
     filter: ""
     projection: []
 productState:
-  alias: Test_Iceberg_Table
+  alias: test_icerberg
   refreshInterval: ""
   retentionVersions: ""
   updateStrategy: overwrite
@@ -37,80 +37,78 @@ productState:
       modified:
         type: DATETIME
   productStoreState:
-    enforceSchemaMethod: Error
+    enforceSchemaMethod: ""
   isProfilingEnabled: true
 transformation:
-  - alias: Select_Columns_1
-    type: ""
-    description: Test Transformation
+  - alias: Spark_SQL_1
+    type: SQL
+    description: test_spark_sql
+    query: test
+    references:
+      - alias: test
+        sqlReference: test$dataset$3$1
 controlPort:
   dataQualityRules:
     tableId:
       productState:
-        checks: 2863
-        referenceAlias: Test_Iceberg_Table
+        checks: 0
+        referenceAlias: test_icerberg
       inputPort:
         - checks: 2863
-          referenceAlias: Test_4_1
+          referenceAlias: test_dataset_3_1
     enable:
       productState:
-        checks: true
-        referenceAlias: Test_Iceberg_Table
+        checks: false
+        referenceAlias: test_icerberg
       inputPort:
         - checks: true
-          referenceAlias: Test_4_1
+          referenceAlias: test_dataset_3_1
       transformation:
         - checks: true
-          referenceAlias: Select_Columns_1
-    RecordCountCheck:
-      productState:
-        expression: ">="
-        number: 111
-        referenceAlias: Test_Iceberg_Table
-      inputPort:
-        - checks:
-            expression: ">="
-            number: 10
-          referenceAlias: Test_4_1
-      transformation:
-        - checks:
-            expression: ">="
-            number: 16
-          referenceAlias: Select_Columns_1
-    NullValueCheck:
+          referenceAlias: Spark_SQL_1
+    NullCombinationCheck:
       productState:
         checks:
-          - column: test
-            expression: <
+          - columns:
+              - test
+            expression: ">="
             number: 11
-        referenceAlias: Test_Iceberg_Table
-      transformation:
+        referenceAlias: test_icerberg
+      inputPort:
         - checks:
-            - column: test
-              expression: <=
-              number: 15
-          referenceAlias: Select_Columns_1
-    UnacceptableTextValueCheck:
-      productState:
-        checks:
-          - column: test
-            valueList:
-              - "1"
-            expression: "!="
-            number: 1
-        referenceAlias: Test_Iceberg_Table
-    UniqueCombinationCheck:
+            - columns:
+                - test
+              expression: ==
+              number: 1
+          referenceAlias: test_dataset_3_1
       transformation:
         - checks:
             - columns:
                 - test
-              owner: test
-              stepsToFix: test
-          referenceAlias: Select_Columns_1
-    DistinctValueCountCheck:
+              expression: <
+              number: 10
+          referenceAlias: Spark_SQL_1
+    RecordCountCheck:
+      inputPort:
+        - checks:
+            expression: ">="
+            number: 10
+          referenceAlias: test_dataset_3_1
+      transformation:
+        - checks:
+            expression: ">="
+            number: 10
+          referenceAlias: Spark_SQL_1
+    NullValueCheck:
+      inputPort:
+        - checks:
+            - column: test
+              expression: <=
+              number: 10
+          referenceAlias: test_dataset_3_1
       transformation:
         - checks:
             - column: test
-              expression: ">="
+              expression: <=
               number: 11
-          referenceAlias: Select_Columns_1
+          referenceAlias: Spark_SQL_1
