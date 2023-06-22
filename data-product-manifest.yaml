@@ -79,17 +79,21 @@ controlPort:
   dataQualityRules:
     tableId:
       productState:
+        referenceAlias: Load_final_PMS_State_Profiling
         checks: 2865
     enable:
       productState:
+        referenceAlias: Load_final_PMS_State_Profiling
         checks: true
     RecordCountCheck:
       productState:
+        referenceAlias: Load_final_PMS_State_Profiling
         checks:
           expression: ">="
           number: 227
     NullValueCheck:
       productState:
+        referenceAlias: Load_final_PMS_State_Profiling
         checks:
           - column: NEName
             expression: ==
