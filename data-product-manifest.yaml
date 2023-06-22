@@ -80,8 +80,8 @@ controlPort:
     RecordCountCheck:
       productState:
         referenceAlias: Load_final_PMS_State_Profiling
-          expression: ">="
-          number: 227
+        expression: ">="
+        number: 227
     NullValueCheck:
       productState:
         referenceAlias: Load_final_PMS_State_Profiling
