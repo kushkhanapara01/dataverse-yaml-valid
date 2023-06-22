@@ -76,7 +76,7 @@ outputPort:
     - channelType: JDBC
       queryType: SQL
 controlPort:
-  dataQualityCheck:
+  dataQualityRules:
     tableId:
       stateManagement:
         checks: 2865
