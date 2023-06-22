@@ -1,14 +1,14 @@
 version: 0.1.0
-jobId: '571'
+jobId: "571"
 jobName: Source Aligned DP 3
 jobType: Source Aligned Data Product
-alias: test_icerberg
+alias: test_icerberg1
 discoveryPort:
-  name: Source Aligned DP 3
-  description: ''
-  category: ''
-  image: 'https://google.com'
-  autofillUserinfo: ''
+  name: Source Aligned DP 31
+  description: ""
+  category: ""
+  image: https://google.com
+  autofillUserinfo: ""
   tags: []
   extra: {}
 inputPorts:
@@ -18,13 +18,13 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3-csv
-    dataSetUrn: 'urn:dv:dataset:d6c0a3ce-8b37-4831-b460-43df14ee7fa5'
-    filter: ''
+    dataSetUrn: urn:dv:dataset:58967f92-0928-48d9-89cc-659502378411
+    filter: ""
     projection: []
 productState:
   alias: test_icerberg
-  refreshInterval: ''
-  retentionVersions: ''
+  refreshInterval: ""
+  retentionVersions: ""
   updateStrategy: overwrite
   logicalSchema:
     properties:
@@ -37,7 +37,7 @@ productState:
       modified:
         type: DATETIME
   productStoreState:
-    enforceSchemaMethod: ''
+    enforceSchemaMethod: ""
   isProfilingEnabled: true
 transformation:
   - alias: Spark_SQL_1
@@ -47,20 +47,33 @@ transformation:
     references:
       - alias: test
         sqlReference: test$dataset$3$1
-outputPort:
-  subscriptionChannels:
-    - channelType: JDBC
-      queryType: SQL
 controlPort:
   dataQualityRules:
+    tableId:
+      productState:
+        checks: 0
+        referenceAlias: test_icerberg
+      inputPort:
+        - checks: 2863
+          referenceAlias: test_dataset_3_1
+    enable:
+      productState:
+        checks: false
+        referenceAlias: test_icerberg
+      inputPort:
+        - checks: true
+          referenceAlias: test_dataset_3_1
+      transformation:
+        - checks: true
+          referenceAlias: Spark_SQL_1
     NullCombinationCheck:
       productState:
-        referenceAlias: test_icerberg
         checks:
           - columns:
               - test
-            expression: '>='
+            expression: ">="
             number: 11
+        referenceAlias: test_icerberg
       inputPort:
         - checks:
             - columns:
@@ -77,11 +90,11 @@ controlPort:
           referenceAlias: Spark_SQL_1
     RecordCountCheck:
       inputPort:
-        - expression: '>='
+        - expression: ">="
           number: 10
           referenceAlias: test_dataset_3_1
       transformation:
-        - expression: '>='
+        - expression: ">="
           number: 10
           referenceAlias: Spark_SQL_1
     NullValueCheck:
@@ -97,3 +110,7 @@ controlPort:
               expression: <=
               number: 11
           referenceAlias: Spark_SQL_1
+outputPort:
+  subscriptionChannels:
+    - channelType: JDBC
+      queryType: SQL
