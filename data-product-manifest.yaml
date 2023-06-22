@@ -78,18 +78,18 @@ outputPort:
 controlPort:
   dataQualityRules:
     tableId:
-      stateManagement:
+      productState:
         checks: 2865
     enable:
-      stateManagement:
+      productState:
         checks: true
     RecordCountCheck:
-      stateManagement:
+      productState:
         checks:
           expression: ">="
           number: 227
     NullValueCheck:
-      stateManagement:
+      productState:
         checks:
           - column: NEName
             expression: ==
