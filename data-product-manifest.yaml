@@ -1,92 +1,116 @@
 version: 0.1.0
-alias: Load_final_PMS_State_Profiling
+jobId: "572"
+jobName: Test Source Aligned 4
+jobType: Source Aligned Data Product
+alias: Test_Iceberg_Table
 discoveryPort:
-  name: PMS_profiling
-  shortDescription: ShortDescription
-  longDescription: LongDescriptionDescription
-  industryDomain: "inDomaiin"
-  regulatoryFields:
-    dataPrivacy: public
-    customerInfo: nonPII
-    dataOrigin: machineGenerated
-    monetaryInfo: nonFinancialData
-  function: abc
+  name: Test Source Aligned 4
+  description: ""
+  category: ""
   image: https://google.com
   autofillUserinfo: ""
-  tags: ['Tag1']
+  tags: []
   extra: {}
-  createdTs: 1687281186
-  updatedTs: 1687281186
 inputPorts:
-  - alias: PMS_Transactions_1
-    description: PMS Transactions
+  - alias: Test_4_1
+    description: Test 4
     tags: []
     extra: {}
     syncType: pull
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:393c056e-8a0e-4ced-b48d-0af88f9d89ef
-    filter: ""
-    projection: []
-  - alias: PMS_Master_1
-    description: PMS Transactions
-    tags: []
-    extra: {}
-    syncType: pull
-    type: s3-csv
-    dataSetUrn: urn:dv:dataset:504db40f-9d55-4b08-a75c-9d732997f13f
+    dataSetUrn: urn:dv:dataset:d4721b29-5a1b-4db4-8c31-6c00efe57ae6
     filter: ""
     projection: []
 productState:
-  alias: Load final PMS State
+  alias: Test_Iceberg_Table
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: append
+  updateStrategy: overwrite
   logicalSchema:
     properties:
-      DNID:
+      id:
+        type: NUMBER
+      name:
         type: STRING
-      DNName:
-        type: STRING
-      NEName:
-        type: STRING
-      InitTime:
-        type: STRING
-      State:
-        type: STRING
-      City:
-        type: STRING
+      marks:
+        type: NUMBER
+      modified:
+        type: DATETIME
   productStoreState:
-    enforceSchemaMethod: Warning
+    enforceSchemaMethod: Error
   isProfilingEnabled: true
 transformation:
-  - alias: Spark_SQL_1
-    type: SQL
-    description: Join transaction and master
-    query: select DNID,DNName,NEName,InitTime,State,City from pmstransaction pmt
-      left join pmsmaster pmm on pmt.nename = pmm.sap_id_name
-    references:
-      - alias: PMS_Transactions_1
-        sqlReference: pmstransaction
-      - alias: PMS_Master_1
-        sqlReference: pmsmaster
-outputPort:
-  subscriptionChannels:
-    - channelType: REST-API
-      queryType: SQL
-    - channelType: JDBC
-      queryType: SQL
+  - alias: Select_Columns_1
+    type: ""
+    description: Test Transformation
 controlPort:
   dataQualityRules:
+    tableId:
+      productState:
+        checks: 2863
+        referenceAlias: Test_Iceberg_Table
+      inputPort:
+        - checks: 2863
+          referenceAlias: Test_4_1
+    enable:
+      productState:
+        checks: true
+        referenceAlias: Test_Iceberg_Table
+      inputPort:
+        - checks: true
+          referenceAlias: Test_4_1
+      transformation:
+        - checks: true
+          referenceAlias: Select_Columns_1
     RecordCountCheck:
       productState:
-        referenceAlias: Load_final_PMS_State_Profiling
         expression: ">="
-        number: 227
+        number: 111
+        referenceAlias: Test_Iceberg_Table
+      inputPort:
+        - checks:
+            expression: ">="
+            number: 10
+          referenceAlias: Test_4_1
+      transformation:
+        - checks:
+            expression: ">="
+            number: 16
+          referenceAlias: Select_Columns_1
     NullValueCheck:
       productState:
-        referenceAlias: Load_final_PMS_State_Profiling
         checks:
-          - column: NEName
-            expression: ==
-            number: 100
-            stepsToFix: Fix on your own
+          - column: test
+            expression: <
+            number: 11
+        referenceAlias: Test_Iceberg_Table
+      transformation:
+        - checks:
+            - column: test
+              expression: <=
+              number: 15
+          referenceAlias: Select_Columns_1
+    UnacceptableTextValueCheck:
+      productState:
+        checks:
+          - column: test
+            valueList:
+              - "1"
+            expression: "!="
+            number: 1
+        referenceAlias: Test_Iceberg_Table
+    UniqueCombinationCheck:
+      transformation:
+        - checks:
+            - columns:
+                - test
+              owner: test
+              stepsToFix: test
+          referenceAlias: Select_Columns_1
+    DistinctValueCountCheck:
+      transformation:
+        - checks:
+            - column: test
+              expression: ">="
+              number: 11
+          referenceAlias: Select_Columns_1
