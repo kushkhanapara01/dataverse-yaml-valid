@@ -1,96 +1,97 @@
----
 version: 0.1.0
-alias: SCD2_testing_123
+alias: Load_final_PMS_State_Profiling
 discoveryPort:
-  name: SCD2 changes implementation Verification 31 May Test 11
-  alias: Test0001_input_port
-  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
-  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
-  tags:
-    - Madrid
-    - House Rental
-  versionInformation: '0.1'
-  urn: urn:dv:dataproduct:6d4714c3
-  organization: MAF
-  createdBy: Ashwini
-  createdOn: '212249844399'
-  fromMinDataDate: '2022-04-07'
-  toMaxDataDate: '2022-04-14'
-  lastUpdated: '2022-04-07'
-  refreshFrequency: Daily
-  industryDomain: Meteorology
-  function: Forecast
+  name: PMS_profiling
+  shortDescription: ShortDescription
+  longDescription: LongDescriptionDescription
+  industryDomain: "inDomaiin"
   regulatoryFields:
     dataPrivacy: public
     customerInfo: nonPII
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
-  qualityInformation:
-    dataAccuracy: 95%
-  authorisation-Information:
-    organization: MAF, Accenture
-    geography:
-      type: state
-      value: Gujarat
-    industryDomain:
-    - Meteorology , Weather
-    refreshInterval: Daily
-    typeofAuthorisation-InclusionExclusion: Inclusion
-  category: customer
-  image: http://google.com
-  autofillUserinfo: true
+  function: abc
+  image: https://google.com
+  autofillUserinfo: ""
+  tags: ['Tag1']
   extra: {}
+  createdTs: 1687281186
+  updatedTs: 1687281186
 inputPorts:
-  - alias: Test0001_input_port
-    description: dqcheck
-    type: s3-csv
+  - alias: PMS_Transactions_1
+    description: PMS Transactions
     tags: []
+    extra: {}
     syncType: pull
-    dataSetUrn: urn:dv:dataset:7eb2db7c-a3b1-4f91-9d0b-6c45faa4e9bb
-    entity:
-      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
-      advanceOptions:
-        delimiter: ','
-        header: true
-      filter: ""
-      projection:
-        - id
-        - name
-        - marks
-        - modified
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:aab2feae-580d-4f1f-9bd0-4a6b59872330
+    filter: ""
+    projection: []
+  - alias: PMS_Master_1
+    description: PMS Transactions
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3-csv
+    dataSetUrn: urn:dv:dataset:79c7ffb6-9365-42b0-ba63-fc3f561a4e74
+    filter: ""
+    projection: []
 productState:
-  refreshInterval: "*/10 * * * *"
-  updateStrategy: scd2
+  alias: Load final PMS State
+  refreshInterval: ""
+  retentionVersions: ""
+  updateStrategy: append
   logicalSchema:
     properties:
-      id:
-        type: number
-      name:
-        type: String
-      marks:
-        type: number
-      modified:
-        type: datetime
-  updateStrategyOptions:
-    actualTimeColumn: nothing
-    uniqueKeyColumns:
-        - id
-    changeTrackingColumns:
-        - marks
-    timeTrackingColumn: modified
+      DNID:
+        type: STRING
+      DNName:
+        type: STRING
+      NEName:
+        type: STRING
+      InitTime:
+        type: STRING
+      State:
+        type: STRING
+      City:
+        type: STRING
+  productStoreState:
+    enforceSchemaMethod: Warning
+  isProfilingEnabled: true
 transformation:
-  - alias: Test0001_input_port_trans
-    description: step_1
+  - alias: Spark_SQL_1
     type: SQL
-    sequenceNo: '1'
-    query: SELECT * FROM Test0001_input_port
+    description: Join transaction and master
+    query: select DNID,DNName,NEName,InitTime,State,City from pmstransaction pmt
+      left join pmsmaster pmm on pmt.nename = pmm.sap_id_name
     references:
-      - alias: Test0001_input_port
-        sqlReference: Test0001_input_port
+      - alias: PMS_Transactions_1
+        sqlReference: pmstransaction
+      - alias: PMS_Master_1
+        sqlReference: pmsmaster
 outputPort:
   subscriptionChannels:
+    - channelType: REST-API
+      queryType: SQL
     - channelType: JDBC
       queryType: SQL
+controlPort:
+  dataQualityCheck:
+    tableId:
+      stateManagement:
+        checks: 2865
+    enable:
+      stateManagement:
+        checks: true
+    RecordCountCheck:
+      stateManagement:
+        checks:
+          expression: ">="
+          number: 227
+    NullValueCheck:
+      stateManagement:
+        checks:
+          - column: NEName
+            expression: ==
+            number: 100
+            stepsToFix: Fix on your own
