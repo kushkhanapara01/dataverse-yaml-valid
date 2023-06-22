@@ -47,6 +47,7 @@ transformation:
     references:
       - alias: test
         sqlReference: test$dataset$3$1
+outputPort: {}
 controlPort:
   dataQualityRules:
     NullCombinationCheck:
