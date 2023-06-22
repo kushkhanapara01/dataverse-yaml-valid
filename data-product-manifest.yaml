@@ -88,7 +88,6 @@ controlPort:
     RecordCountCheck:
       productState:
         referenceAlias: Load_final_PMS_State_Profiling
-        checks:
           expression: ">="
           number: 227
     NullValueCheck:
