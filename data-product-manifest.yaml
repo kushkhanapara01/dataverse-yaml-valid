@@ -47,7 +47,10 @@ transformation:
     references:
       - alias: test
         sqlReference: test$dataset$3$1
-outputPort: {}
+outputPort:
+  subscriptionChannels:
+    - channelType: JDBC
+      queryType: SQL
 controlPort:
   dataQualityRules:
     NullCombinationCheck:
