@@ -1,10 +1,9 @@
-version: 0.1.0
-jobId: "571"
-jobName: Source Aligned DP 3
+jobId: "1"
+jobName: PMS Test V6
 jobType: Source Aligned Data Product
-alias: test_icerberg1
+alias: Load_final_PMS_State_final_v6
 discoveryPort:
-  name: Source Aligned DP 31
+  name: PMS Test V6
   description: ""
   category: ""
   image: https://google.com
@@ -12,104 +11,60 @@ discoveryPort:
   tags: []
   extra: {}
 inputPorts:
-  - alias: test_dataset_3_1
-    description: test dataset 3
+  - alias: PMS_Transactions_1
+    description: PMS Transactions
     tags: []
     extra: {}
     syncType: pull
-    type: s3-csv
-    dataSetUrn: urn:dv:dataset:d6c0a3ce-8b37-4831-b460-43df14ee7fa5
+    type: 'dataproduct'
+    dataProductUrn: urn:dv:dataproduct:5f20f51a-a11c-4490-91c1-114bbd479822
     filter: ""
     projection: []
 productState:
-  alias: test_icerberg
-  refreshInterval: ""
+  alias: Load_final_PMS_State_final
+  refreshInterval: "0 * * * *"
   retentionVersions: ""
-  updateStrategy: overwrite
+  updateStrategy: append
   logicalSchema:
     properties:
-      id:
-        type: NUMBER
-      name:
+      DNID:
         type: STRING
-      marks:
-        type: NUMBER
-      modified:
-        type: DATETIME
+      DNName:
+        type: STRING
+      NEName:
+        type: STRING
+      InitTime:
+        type: STRING
+      State:
+        type: STRING
+      City:
+        type: STRING
   productStoreState:
-    enforceSchemaMethod: ""
+    enforceSchemaMethod: Warning
   isProfilingEnabled: true
 transformation:
   - alias: Spark_SQL_1
     type: SQL
-    description: test_spark_sql
-    query: test
+    description: Join transaction and master
+    query: select * from pmstransaction
     references:
-      - alias: test
-        sqlReference: test$dataset$3$1
+      - alias: PMS_Transactions_1
+        sqlReference: pmstransaction
 controlPort:
   dataQualityRules:
-    tableId:
+    RecordCountCheck:
       productState:
-        checks: 0
-        referenceAlias: test_icerberg
-      inputPort:
-        - checks: 2863
-          referenceAlias: test_dataset_3_1
-    enable:
-      productState:
-        checks: false
-        referenceAlias: test_icerberg
-      inputPort:
-        - checks: true
-          referenceAlias: test_dataset_3_1
-      transformation:
-        - checks: true
-          referenceAlias: Spark_SQL_1
-    NullCombinationCheck:
+        expression: "<="
+        number: 227
+        referenceAlias: Load_final_PMS_State_final_v6
+    NullValueCheck:
       productState:
         checks:
-          - columns:
-              - test
-            expression: ">="
-            number: 11
-        referenceAlias: test_icerberg
-      inputPort:
-        - checks:
-            - columns:
-                - test
-              expression: ==
-              number: 1
-          referenceAlias: test_dataset_3_1
-      transformation:
-        - checks:
-            - columns:
-                - test
-              expression: <
-              number: 10
-          referenceAlias: Spark_SQL_1
-    RecordCountCheck:
-      inputPort:
-        - expression: ">="
-          number: 10
-          referenceAlias: test_dataset_3_1
-      transformation:
-        - expression: ">="
-          number: 10
-          referenceAlias: Spark_SQL_1
-    NullValueCheck:
-      inputPort:
-        - checks:
-            - column: test
-              expression: <=
-              number: 10
-          referenceAlias: test_dataset_3_1
-      transformation:
-        - checks:
-            - column: test
-              expression: <=
-              number: 11
-          referenceAlias: Spark_SQL_1
+          - column: NEName
+            expression: ==
+            number: 1
+            stepsToFix: Fix on your own
+        referenceAlias: Load_final_PMS_State_final_v6
 outputPort:
   subscriptionChannels:
     - channelType: JDBC
