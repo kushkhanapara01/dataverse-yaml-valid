@@ -27,6 +27,7 @@ productState:
   refreshInterval: ""
   retentionVersions: ""
   updateStrategy: "append"
+  updateStrategyOptions: {}
   logicalSchema: ""
   productStoreState:
     enforceSchemaMethod: Error
