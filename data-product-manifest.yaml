@@ -26,7 +26,7 @@ productState:
   alias: asdasdasd
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: ""
+  updateStrategy: "append"
   logicalSchema: ""
   productStoreState:
     enforceSchemaMethod: Error
