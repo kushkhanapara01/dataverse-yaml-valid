@@ -1,105 +1,46 @@
 ---
-version: 0.0.1
+version: 0.1.0
+jobId: "583"
+jobName: abc
+jobType: Source Aligned Data Product
+alias: asdasd
 discoveryPort:
-  alias: alias
-  name: Run and Test
-  description: Average car price in barcelona
-  category: customer
-  image: http://google.com
-  autofillUserinfo: true
+  name: abc
+  description: ""
+  category: ""
+  image: https://google.com
+  autofillUserinfo: ""
   tags: []
   extra: {}
 inputPorts:
-  - alias: car_input_port
-    description: string
+  - alias: asdasasasasasdaas_1
+    description: asdasasasasasdaas
     tags: []
     extra: {}
     syncType: pull
-    type: s3
-#     sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
-    sourceUrn: dataProductUrn: urn:dv:931fe938-4777-48cd-95d7-da5b5a24c365
-    entityId:
-      alias: car_prices
-      createEntity: true
-      incrementalLoad: true
-      incrementalStrategy:
-        frequency: 
-          - keyReference: asd
-          - mode: absolute
-          - interval: 1
-      type: s3-bucket
-      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      entityVariables:
-        - key: my_dynamic_year
-          value: date-YYYYMMdd
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: csv
-      delimiter: ","
-      header: true
-      processingTimeColumn:
-        - processing_time
-      actualTimeColumn:
-        - processing_time
-      projection:
-        - legal_entity
-        - store_name
-        - amount
-        - payment_option
-        - currency
-  - alias: car_input_port1
-    description: string
-    tags: []
-    extra: {}
-    syncType: pull
-    type: s3
-    sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
-    entityId:
-      alias: car_prices
-      createEntity: true
-      type: s3-bucket
-      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      entityVariables:
-        - key: my_dynamic_year
-          value: date-YYYYMMdd
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: csv
-      delimiter: ","
-      header: true
-      processingTimeColumn:
-        - processing_time
-      actualTimeColumn:
-        - processing_time
-      projection:
-        - legal_entity
-        - store_name
-        - amount
-        - payment_option
-        - currency
-stateManagement:
-  alias: car_prices
-  refreshInterval: "*/10 * * * *"
-  updateStrategy: append
+    type: s3-parquet
+    dataSetUrn: urn:dv:dataset:07c0672d-96c3-4183-b3da-74480b5809f1
+    filter: ""
+    projection: []
+productState:
+  alias: asdasd
+  refreshInterval: ""
+  retentionVersions: ""
+  updateStrategy: SCD1
+  logicalSchema: ""
   productStoreState:
-    logicalSchema:
-      properties:
-        brand:
-        engine:
-        year:
-        location:
-    retentionVersions: "10"
-  updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
-    tags:
-      - test
+    enforceSchemaMethod: Error
+  isProfilingEnabled: false
+  tableName: asdasd
+  encodingOptions:
+    encodingType: HASH
+    columnsToEncode:
+      - asdfdsf
+  stateStoreType: iceberg
+transformation: []
+controlPort:
+  dataQualityRules: {}
 outputPort:
-  channels:
-    - channelType: REST-API
-      queryType: SQL
+  subscriptionChannels:
     - channelType: JDBC
-      queryType: SQL      
-transformation:
-  sql: select * from car_prices
+      queryType: SQL
