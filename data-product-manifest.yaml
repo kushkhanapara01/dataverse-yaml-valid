@@ -27,7 +27,16 @@ productState:
   refreshInterval: ""
   retentionVersions: ""
   updateStrategy: "append"
-  logicalSchema: {}
+  logicalSchema:
+    properties:
+      id:
+        type: NUMBER
+      name:
+        type: STRING
+      marks:
+        type: NUMBER
+      modified:
+        type: DATETIME
   productStoreState:
     enforceSchemaMethod: Error
   isProfilingEnabled: false
