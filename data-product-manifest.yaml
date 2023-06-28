@@ -3,7 +3,7 @@ version: 0.1.0
 jobId: "583"
 jobName: abc
 jobType: Source Aligned Data Product
-alias: asdasd
+alias: asdasdasd
 discoveryPort:
   name: abc
   description: ""
@@ -23,20 +23,16 @@ inputPorts:
     filter: ""
     projection: []
 productState:
-  alias: asdasd
+  alias: asdasdasd
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: SCD1
+  updateStrategy: ""
   logicalSchema: ""
   productStoreState:
     enforceSchemaMethod: Error
   isProfilingEnabled: false
-  tableName: asdasd
-  encodingOptions:
-    encodingType: HASH
-    columnsToEncode:
-      - asdfdsf
-  stateStoreType: iceberg
+  tableName: adasdads
+  stateStoreType: redshift
 transformation: []
 controlPort:
   dataQualityRules: {}
