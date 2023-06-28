@@ -27,8 +27,7 @@ productState:
   refreshInterval: ""
   retentionVersions: ""
   updateStrategy: "append"
-  updateStrategyOptions: {}
-  logicalSchema: ""
+  logicalSchema: {}
   productStoreState:
     enforceSchemaMethod: Error
   isProfilingEnabled: false
