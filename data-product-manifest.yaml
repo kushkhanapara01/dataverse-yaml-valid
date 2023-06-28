@@ -36,8 +36,7 @@ productState:
         type: NUMBER
       modified:
         type: DATETIME
-  productStoreState:
-    enforceSchemaMethod: Error
+  enforceSchemaMethod: Error
   isProfilingEnabled: false
   tableName: adasdads
   stateStoreType: redshift
