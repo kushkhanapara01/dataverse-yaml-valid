@@ -16,10 +16,10 @@ discoveryPort:
   industryDomain: ""
   function: ""
   regulatoryFields:
-    dataPrivacy: ""
-    customerInfo: ""
-    dataOrigin: ""
-    monetaryInfo: ""
+    dataPrivacy: "public"
+    customerInfo: "nonPII"
+    dataOrigin: "machineGenerated"
+    monetaryInfo: "nonFinancialData"
 inputPorts:
   - alias: Weather_Full_Data_1
     description: Weather Full Data
