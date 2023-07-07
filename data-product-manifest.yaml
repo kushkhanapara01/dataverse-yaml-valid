@@ -39,7 +39,7 @@ productState:
   alias: redshift
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: Append
+  updateStrategy: append
   logicalSchema:
     properties:
       City:
