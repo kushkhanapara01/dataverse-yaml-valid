@@ -1,77 +1,115 @@
-version: 1.0.0
-alias: ""
+version: 0.1.0
+jobId: "13"
+jobName: Weather redshift
+jobType: Source Aligned Data Product
+alias: redshift
 discoveryPort:
-  name: Test Source Aligned Data Product
+  name: Weather redshift
   description: ""
   category: ""
-  image: ""
+  image: https://google.com
   autofillUserinfo: ""
   tags: []
   extra: {}
-  createdBy:
-    name: ""
-    userid: ""
-    email: ""
-  createdTs: ""
-  updatedTs: ""
+  shortDescription: Short Description
+  longDescription: Long Long Long Description
+  industryDomain: ""
+  function: ""
+  regulatoryFields:
+    dataPrivacy: ""
+    customerInfo: ""
+    dataOrigin: ""
+    monetaryInfo: ""
 inputPorts:
-  - alias: Delimited$1
-    description: MDQ vs Actual SOH
+  - alias: Weather_Full_Data_1
+    description: Weather Full Data
     tags: []
     extra: {}
     syncType: pull
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:393c056e-8a0e-4ced-b48d-0af88f9d89ef
-    incrementalStrategy: {}
+    dataSetUrn: urn:dv:dataset:8df27fe0-a881-443e-ae1b-9168fd38621a
     filter: ""
     projection: []
+    dataProductUrn: ""
+    persistDataFrame: false
     entity:
-      createEntity: true
-      path: "This is a ##sample## string with ##multiple## values."
-      variables:
-        - key: sample
-          value: ""
       advanceOptions:
-        delimiter: "|"
-        header: true
+        mergeSchema: false
 productState:
+  alias: redshift
   refreshInterval: ""
-  logicalSchemaUrn: ""
   retentionVersions: ""
-  updateStrategy: ""
-  logicalSchema: ""
-  productStoreState:
-    enforceSchemaMethod: ""
-  updateStrategyOptions:
-    - entityRef: ""
-      uniqueKeyColumns: []
-      changeTrackColumns: []
-      timeTrackColumn: ""
-transformation:
-  - alias: Filter$1
-    type: ""
-    description: ""
+  updateStrategy: Append
+  logicalSchema:
+    properties:
+      City:
+        type: STRING
+      Region:
+        type: STRING
+      Country:
+        type: STRING
+      Latitude:
+        type: STRING
+      Longitude:
+        type: STRING
+      Timezone:
+        type: STRING
+      Local Time:
+        type: STRING
+      Cloud ID:
+        type: STRING
+      Feels like Celcius:
+        type: STRING
+      Feels like fahrenheit:
+        type: STRING
+      Gust speed in kph:
+        type: STRING
+      Gust speed in mph:
+        type: STRING
+      Humidity:
+        type: STRING
+      Is day time?:
+        type: STRING
+      Last update:
+        type: STRING
+      Last updated time in epoch:
+        type: STRING
+      Precipitation in inch:
+        type: STRING
+      Precipitation in mm:
+        type: STRING
+      Pressure:
+        type: STRING
+      Precipitation in mb:
+        type: STRING
+      Temperature in celcius:
+        type: STRING
+      Temperature in fahrenheit:
+        type: STRING
+      UV:
+        type: STRING
+      Visibility in km:
+        type: STRING
+      Visibility in miles:
+        type: STRING
+      Wind Degree:
+        type: STRING
+      Wind Direction:
+        type: STRING
+      Wind in kph:
+        type: STRING
+      Wind in mph:
+        type: STRING
+  enforceSchemaMethod: Warning
+  enforceSchema: false
+  updateStrategyOptions: {}
+  isProfilingEnabled: false
+  tableName: test_weather_table
+  stateStoreType: redshift
+transformation: []
 controlPort:
-  dataQualityCheck:
-    tableId:
-      inputPort:
-        - checks: 2878
-          referenceAlias: Delimited$1
-    enable:
-      inputPort:
-        - checks: true
-          referenceAlias: Delimited$1
-      transformation:
-        - checks: false
-          referenceAlias: Filter$1
-    RecordCountCheck:
-      inputPort:
-        - checks:
-            expression: ">="
-            number: 5
-          referenceAlias: Delimited$1
-      transformation:
-        - checks:
-            expression: ">="
-            number: 10
-          referenceAlias: Filter$1
+  dataQualityRules: {}
+outputPort:
+  subscriptionChannels:
+    - channelType: JDBC
+      queryType: SQL
