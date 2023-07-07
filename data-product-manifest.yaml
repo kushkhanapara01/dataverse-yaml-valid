@@ -2,7 +2,7 @@ version: 0.1.0
 jobId: "13"
 jobName: Weather redshift
 jobType: Source Aligned Data Product
-alias: redshift
+alias: redshift_step
 discoveryPort:
   name: Weather redshift
   description: ""
@@ -16,10 +16,10 @@ discoveryPort:
   industryDomain: ""
   function: ""
   regulatoryFields:
-    dataPrivacy: "public"
-    customerInfo: "nonPII"
-    dataOrigin: "machineGenerated"
-    monetaryInfo: "nonFinancialData"
+    dataPrivacy: ""
+    customerInfo: ""
+    dataOrigin: ""
+    monetaryInfo: ""
 inputPorts:
   - alias: Weather_Full_Data_1
     description: Weather Full Data
@@ -36,10 +36,10 @@ inputPorts:
       advanceOptions:
         mergeSchema: false
 productState:
-  alias: redshift
+  alias: redshift_step
   refreshInterval: ""
   retentionVersions: ""
-  updateStrategy: append
+  updateStrategy: Append
   logicalSchema:
     properties:
       City:
@@ -102,10 +102,18 @@ productState:
         type: STRING
   enforceSchemaMethod: Warning
   enforceSchema: false
+  updateStrategyOptions: {}
   isProfilingEnabled: false
   tableName: test_weather_table
   stateStoreType: redshift
-transformation: []
+transformation:
+  - alias: Spark_SQL_1
+    type: SQL
+    description: sqltest
+    query: select * from weather
+    references:
+      - alias: Weather_Full_Data_1
+        sqlReference: weather
 controlPort:
   dataQualityRules: {}
 outputPort:
